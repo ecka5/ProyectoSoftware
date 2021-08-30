@@ -1,0 +1,138 @@
+{% extends "plantilla.html" %}
+{% block title %} Lista Alumno {% endblock %}
+{% block content %}
+<div class="container">
+    <div class="card card-outline card-info mt-3">
+        <div class="card-header">    
+            <h1 class="card-title"> <b>LISTADO DE ALUMNOS</b>   </h1>      <br><br>
+            <a href="{% url 'agregaralumno' %}" class='btn btn-sm btn-light btn-add'><i class='fas fa-plus'></i> NUEVO</a>
+           
+        </div>
+
+        <div class="card-body">        
+            <div class="row"> 
+                <div class="col-md-6 pull-right">
+                    <form action="" method="GET">
+                        <div class="input-group">
+                            <input type="text" name="buscar" id="buscar" class="form-control" autofocus placeholder="Buscar" value="">
+                            <span class="input-group-btn">
+                            <button class="btn btn-primary">
+                            <i class="fa fa-search"></i>
+                            </button>
+                            </span>
+                        </div>         
+                    </form>
+                </div> 
+            </div>
+
+            <table class="table mt-2">
+                <table id="tablasubfamilias" class="table table-striped mt-4" style="width:100%">
+                    <thead class="bg-info text-white">
+                        <tr>
+                            <th>CODIGO</th>
+                            <th>NOMBRES</th>       
+                            <th>APELLIDOS</th>                               
+                            <th>DNI</th>        
+                            <th>DIRECCION</th>        
+                            <th>EMAIL</th>        
+                            <th>TELEFONO</th>      
+                            <th><center>OPCIONES</center></th> 
+                         
+                        </tr>
+                    </thead> 
+                    {% if alumno %}
+                        {% for itemalumno in alumno %} 
+                        <tr><!--  codigo pa que meustre los datos, verifica si hay registro -->
+                            <td>{{ itemalumno.codigo }}</td>                        
+                            <td>{{ itemalumno.nombres }}</td>
+                            <td>{{ itemalumno.apellidos }}</td>
+                            <td>{{ itemalumno.dni }}</td>
+                            <td>{{ itemalumno.direccion }}</td>
+                            <td>{{ itemalumno.email }}</td>
+                            <td>{{ itemalumno.telefono }}</td>                        
+                                                     
+                            <td style="text-align: center;">
+                                <a href="{% url 'editaralumno' itemalumno.id %}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> Editar</a> 
+                                <a href="#" onclick="eliminarAlumno('{{itemalumno.codigo}}','{{itemalumno.nombres}}','{{itemalumno.apellidos}}')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Eliminar</a>                            </td>
+                        </tr> 
+                        {% endfor %}
+                    {% else %}
+                    <tr style="text-align: center;"><!--   si no hay registro , no muestren datos ps -->
+                        <td colspan="3">
+                            <p>No hay Registros</p>
+                        </td> 
+                    </tr>
+                    {% endif %}
+                </table> 
+            </div> 
+            
+                <div class = "row mt-3 justify-content-center">
+                <nav>
+                    <ul class="pagination">
+                        {% if alumno.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page=1">Primera</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ alumno.previous_page_number }}">&laquo;</a>
+                        </li>
+                        {% endif %}
+
+                        {% for pagina in paginas %}
+                            <li class="page-item{% if pagina_action == page %} active {% endif %}">
+                                <a class="page-link" href="?page={{ pagina }}">{{ pagina }}</a>
+                            </li>
+                        {% endfor %}
+
+                        {% if alumno.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ alumno.next_page_number }}">&raquo;</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ alumno.paginator.num_pages }}">Última</a>
+                        </li>
+                        {% endif %}
+
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{% if messages %}
+    {% for m in messages %}
+        <script>
+            Swal.fire({
+            "title": "Eliminado",
+            "text":"{{m}}",
+            "icon":"success"
+            })
+        </script>
+    {% endfor %}
+{% endif %}
+
+<script>
+    function eliminarAlumno(codigo,nombres,apellidos){
+    Swal.fire({
+        "title":"¿Realmente desea eliminar Registro?",
+        "text":"Codigo: "+ codigo + "| Alumno: " + nombres +" "+ apellidos,
+        "icon":"question",
+        "showCancelButton":true,
+        "cancelButtonText":"No",
+        "confirmButtonText":"Si",
+        "reverseButton":true,
+        "confirmButtonColor":"#dc3545"
+    })
+    .then(function(result){
+        if(result.isConfirmed){
+            window.location.href="/eliminaralumno/"+id+"/"
+        }
+    })
+    }
+</script>
+{% endblock %}
