@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+from django.contrib import messages
+from django.contrib.messages import constants as message_constants
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'seguridadApp',
     'tramitesApp',
-    'crispy_forms'
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -57,8 +59,9 @@ ROOT_URLCONF = 'PROYECTO.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [   'D:/Docs/ProyectoSoftware/PROYECTO/template/',
-                    'D:/Docs/ProyectoSoftware/tramitesApp/template/'],
+        'DIRS': [   'D:/djangoproyectos/ProyectoSoftware/PROYECTO/template/',
+                    'D:/djangoproyectos/ProyectoSoftware/tramitesApp/template/',
+                    'D:/djangoproyectos/ProyectoSoftware/seguridadApp/template/'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -82,7 +85,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME':'bdproyecto',
         'USER':'postgres',
-        'PASSWORD':'1234',
+        'PASSWORD':'geraldine99',
         'HOST':'127.0.0.1',
         'DATABASE_PORT':'5432'
     }
@@ -135,3 +138,11 @@ import os
 MEDIA_URL = '/media/'
 # MEDIA_URL = 'D:/PROYECTOS/sistemaG1/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,"media")
+
+MESSAGE_TAGS={
+    message_constants.DEBUG:'debug',
+    message_constants.INFO:'info',
+    message_constants.SUCCESS:'succes',
+    message_constants.WARNING:'warning',
+    message_constants.ERROR:'danger',
+}
