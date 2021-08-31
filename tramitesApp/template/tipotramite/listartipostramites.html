@@ -5,8 +5,9 @@
     <div class="card card-outline card-info mt-3">
         <div class="card-header">    
             <h1 class="card-title"> <b>Lista de Tipos de Trámites</b>   </h1>      <br><br>
+            {% if perms.tramitesApp.add_tipotramite %}
             <a href="{% url 'agregartipostramites' %}" class='btn btn-sm btn-light btn-add'><i class='fas fa-plus'></i> NUEVO</a>
-           
+            {% endif %}  
         </div>
 
         <div class="card-body">        
@@ -29,10 +30,14 @@
                 <table id="tablasubfamilias" class="table table-striped mt-4" style="width:100%">
                     <thead class="bg-info text-white">
                         <tr>
-                            <th><center>#</center></th>
-                            <th><center>TIPO DE TRÁMITE</center></th>                                  
-                            <th><center>OPCIONES</center></th> 
-                         
+                            <th><center>#</center></th> 
+                            <th><center>TIPO DE TRÁMITE</center></th>
+                            {% if perms.tramitesApp.add_tipotramite %}
+                            <th><center>OPCIONES</center></th>
+                            {% endif %}
+                            {% if perms.tramitesApp.view_tipotramite %}
+                            <th><center>REQUISITOS</center></th>
+                            {% endif %}
                         </tr>
                     </thead> 
                     {% if tipoT %}
@@ -40,12 +45,17 @@
                         <tr><!--  codigo pa que meustre los datos, verifica si hay registro -->
                             <td><center>{{ itemtipoT.id }}</center></td>
                             <td><center>{{ itemtipoT.tipoTramite }}</center></td>                                     
-                                                        
+
+                            {% if perms.tramitesApp.add_tipotramite %}                            
                             <td style="text-align: center;">
                             <a href="{% url 'editartipostramites' itemtipoT.id %}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> Editar</a>
                             <a href="#" onclick="eliminartipostramites('{{itemtipoT.id}}','{{itemtipoT.tipoTramite}}')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Eliminar</a>
                             </td>
-                                
+                            {% endif %}
+                            {% if perms.tramitesApp.view_tipotramite %}      
+                            <td> <center><a href="#" class="btn btn-info btn-sm"><i class="fa fa-search mr-2"></i>Ver Requisitos</a> </center>
+                            </td> 
+                            {% endif %}    
                         </tr> 
                         {% endfor %}
                     {% else %}

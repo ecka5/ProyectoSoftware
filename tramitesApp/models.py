@@ -21,7 +21,6 @@ class TipoTramite(models.Model):
 
 class Tramite(models.Model):
     tipoTramite=models.ForeignKey(TipoTramite,on_delete=models.CASCADE)
-    alumno=models.ForeignKey(Alumno,on_delete=models.CASCADE)
     estado=models.BooleanField(default=True)
     firma=models.ImageField(upload_to="tramite",null=True)
     def __str__(self):

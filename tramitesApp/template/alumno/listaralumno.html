@@ -3,11 +3,20 @@
 {% block content %}
 <div class="container">
     <div class="card card-outline card-info mt-3">
-        {{ perms.tramitesApp }}
-        <div class="card-header">    
-            <h1 class="card-title"> <b>LISTADO DE ALUMNOS</b>   </h1>      <br><br>
+        
+        <div class="card-header">
+                
+            <h1 class="card-title"> 
+            {% if perms.tramitesApp.add_alumno %}
+            <b>LISTADO DE ALUMNOS / </b>   
+            {% endif %}
+            {% if perms.tramitesApp.view_alumno %}
+            <b>DATOS PERSONANES</b>
+            {% endif %}
+            </h1>      <br><br>
+            {% if perms.tramitesApp.add_alumno %}
             <a href="{% url 'agregaralumno' %}" class='btn btn-sm btn-light btn-add'><i class='fas fa-plus'></i> NUEVO</a>
-           
+            {% endif %}
         </div>
 
         <div class="card-body">        
@@ -36,9 +45,13 @@
                             <th>DNI</th>        
                             <th>DIRECCION</th>        
                             <th>EMAIL</th>        
-                            <th>TELEFONO</th>      
-                            <th><center>OPCIONES</center></th> 
-                         
+                            <th>TELEFONO</th>
+                            {% if perms.tramitesApp.change_alumno or perms.tramitesApp.delete_alumno%}  
+                            <th><center>OPCIONES</center></th>  
+                            {% endif %}
+                            {% if perms.tramitesApp.view_alumno %}
+                            <th><center>TRÁMITE</center></th>
+                            {% endif %}
                         </tr>
                     </thead> 
                     {% if alumno %}
@@ -51,10 +64,21 @@
                             <td>{{ itemalumno.direccion }}</td>
                             <td>{{ itemalumno.email }}</td>
                             <td>{{ itemalumno.telefono }}</td>                        
-                                                     
+
+                           {% if perms.tramitesApp.change_alumno or perms.tramitesApp.delete_alumno%}  
                             <td style="text-align: center;">
+                                {% if perms.tramitesApp.change_alumno %}
                                 <a href="{% url 'editaralumno' itemalumno.id %}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> Editar</a> 
-                                <a href="#" onclick="eliminarAlumno('{{itemalumno.codigo}}','{{itemalumno.nombres}}','{{itemalumno.apellidos}}')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Eliminar</a>                            </td>
+                                {% endif %}
+                                {% if perms.tramitesApp.delete_alumno %}                        
+                                <a href="#" onclick="eliminarAlumno('{{itemalumno.codigo}}','{{itemalumno.nombres}}','{{itemalumno.apellidos}}')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Eliminar</a>                            
+                                {% endif %}
+                            </td>
+                            {% endif %}
+                            {% if perms.tramitesApp.view_alumno %}      
+                            <td> <a href="#" class="btn btn-info btn-sm"><i class="fa fa-search"></i>Ver Trámite</a> 
+                            </td> 
+                            {% endif %}
                         </tr> 
                         {% endfor %}
                     {% else %}

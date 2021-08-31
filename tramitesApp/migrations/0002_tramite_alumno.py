@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='tramite',
             name='alumno',
-            field=models.ForeignKey(default=datetime.date(2021, 8, 30), on_delete=django.db.models.deletion.CASCADE, to='tramitesApp.alumno'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='tramitesApp.alumno'),
             preserve_default=False,
         ),
     ]
