@@ -31,8 +31,18 @@
             <!-- ACÁ VA EL LOGOUT -->
                 
             </ul>
+            <ul class="navbar-nav ml-auto"> 
+                <li class="nav-item">
+                    <li>
+                        <a href="{% url 'logout' %}" class="btn-danger btn-block"><i class="fa fa-power-off"></i></a>
+                    </li>
+
+                </li>
+             </ul>
         </nav>
     <!-- /.navbar -->
+        
+    
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
@@ -48,7 +58,8 @@
                         <img src="{% static '/adminlte/dist/img/user2-160x160.jpg' %}" class="imgcircle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Usuario</a>
+                    
+                        <a href="#" class="d-block">{{ user.get_username }}</a>
                     </div>
                 </div>
                 <!-- Sidebar Menu -->
@@ -67,24 +78,25 @@
                                 <li class="nav-item">
                                     <a href="{% url 'listaralumno' %}" class="nav-link">
                                         <i class="fa fa-users"></i> 
-                                        <p>Alumnos</p>
+                                        {% if perms.tramitesApp.add_alumno or perms.tramitesApp.change_tramite %}
+                                        <p>Alumnos /</p>
+                                        {% endif %}
+                                        {% if perms.tramitesApp.view_alumno and perms.tramitesApp.change_alumno %}
+                                        <p>Perfil</p>
+                                        {% endif %}
                                     </a>
                                 </li>
+                               
                                 <li class="nav-item">
-                                    <a href=""  class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>ola</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>olas</p>
+                                    <a href="{% url 'listartipostramites' %}" class="nav-link">
+                                        <i class="fa fa-users"></i> 
+                                        <p>Tipos de Trámites</p>
                                     </a>
                                 </li> 
                             </ul>
                         </li>
                         <!-- Opción Ventas -->
+                        {% if perms.tramitesApp.view_alumno and perms.tramitesApp.change_alumno %}
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="fa fa-puzzle-piece"></i>
@@ -97,11 +109,18 @@
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
                                         <i class="fa fa-users"></i> 
-                                        <p>Ventas</p>
+                                        <p>Nuevo Trámite</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="fa fa-users"></i> 
+                                        <p>Trámites Pendientes</p>
                                     </a>
                                 </li>
                             </ul>
                         </li>
+                        {% endif %}
                     <!-- Fin de Ventas --> 
                     </ul>
                 </nav>
