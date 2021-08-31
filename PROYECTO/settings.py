@@ -59,14 +59,9 @@ ROOT_URLCONF = 'PROYECTO.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-<<<<<<< HEAD
         'DIRS': [   'C:/Users/ROBERTO/Documents/GitHub/ProyectoSoftware/PROYECTO/template',
-                    'C:/Users/ROBERTO/Documents/GitHub/ProyectoSoftware/tramitesApp/template'],
-=======
-        'DIRS': [   'D:/djangoproyectos/ProyectoSoftware/PROYECTO/template/',
-                    'D:/djangoproyectos/ProyectoSoftware/tramitesApp/template/',
-                    'D:/djangoproyectos/ProyectoSoftware/seguridadApp/template/'],
->>>>>>> d7066844f1789943b724ff5e5f3bf8466c33a122
+                    'C:/Users/ROBERTO/Documents/GitHub/ProyectoSoftware/tramitesApp/template',
+                    'C:/Users/ROBERTO/Documents/GitHub/ProyectoSoftware/seguridadApp/template'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
