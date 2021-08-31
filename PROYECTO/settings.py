@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+from django.contrib import messages
+from django.contrib.messages import constants as message_constants #establecer etiquetas pal message_constans
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -58,7 +60,9 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [   'D:/Docs/ProyectoSoftware/PROYECTO/template/',
-                    'D:/Docs/ProyectoSoftware/tramitesApp/template/'],
+                    'D:/Docs/ProyectoSoftware/tramitesApp/template/',
+                    'D:/Docs/ProyectoSoftware/seguridadApp/template/'],
+                    
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -131,6 +135,13 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRISPY_TEMPLATE_PACK="bootstrap4"
 
+MESSAGE_TAGS={
+    message_constants.DEBUG:'debug',
+    message_constants.INFO:'info',
+    message_constants.SUCCESS:'succes',
+    message_constants.WARNING:'warning',
+    message_constants.ERROR:'danger',
+}
 import os
 MEDIA_URL = '/media/'
 # MEDIA_URL = 'D:/PROYECTOS/sistemaG1/media/'

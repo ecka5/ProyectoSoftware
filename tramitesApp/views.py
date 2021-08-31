@@ -3,7 +3,8 @@ from tramitesApp.models import Alumno, TipoTramite, Tramite
 from django.db.models import Q
 from .forms import AlumnoForm 
 from django.core.paginator import Paginator
-
+from django.views.generic import TemplateView
+from django.http.response import HttpResponse
 # Create your views here.
 
 def listaralumno(request):
@@ -47,6 +48,18 @@ def editaralumno(request,id):
     context={"form":form}
     return render(request,"alumno/editaralumno.html",context)
 
+def vistaalumno(request,id):
+    alumno=Alumno.objects.get(id=id)
+    form=AlumnoForm(instance=alumno)
+    context={"form":form}
+    return render(request,"alumno/vistaalumno.html",context)
+
+# class vista(TemplateView):
+#     def get(self,request,*args,**kwargs):
+#         alumno=Alumno.objects.get(id=id)
+#         form=AlumnoForm(instance=alumno)
+#         context={"form":form}
+#         return render(request,"alumno/vistaalumno.html",context)
 
 def eliminaralumno(request,id):
     alumno=Alumno.objects.get(id=id)
