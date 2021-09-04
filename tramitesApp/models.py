@@ -1,6 +1,6 @@
 from django.db import models
 
-# Create your models here.
+# Create your models here. 
 class Alumno(models.Model):
     nombres=models.CharField(max_length=40)
     apellidos=models.CharField(max_length=40)
