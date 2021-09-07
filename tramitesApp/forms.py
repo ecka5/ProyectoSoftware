@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import fields
-from .models import Alumno,Requisito,TipoRequisito,TipoTramite,Tramite,EstadoTramite,BandejaTramite
+from .models import Alumno,Requisito,TipoTramite,Tramite,EstadoTramite,BandejaTramite
 
 class AlumnoForm(forms.ModelForm): 
     class Meta:
@@ -10,11 +10,6 @@ class AlumnoForm(forms.ModelForm):
 class TipoTramiteForm(forms.ModelForm): 
     class Meta:
         model=TipoTramite
-        fields='__all__'
-
-class TipoRequisitoForm(forms.ModelForm): 
-    class Meta:
-        model=TipoRequisito
         fields='__all__'
         
 class RequisitoForm(forms.ModelForm): 

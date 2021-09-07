@@ -1,0 +1,46 @@
+<div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+        <div class="modal-header row">
+            <div class="col-11">
+                <h2 class="modal-title"><center>Listado de Requisitos</center></h2>
+            </div>
+            <div class="col-1">
+                <button class="close" type="button" data-dismiss= "modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>                
+                </button>
+            </div>           
+        </div>
+        <div class="modal-body">
+            <div class="container">
+                <div class="card card-outline card-info mt-3">
+                    <div class="card-body">                
+                        <table class="table mt-2">
+                            <table id="tablasubfamilias" class="table table-striped mt-4" style="width:100%">
+                                <thead class="bg-info text-white">
+                                    <tr>
+                                        {% if perms.tramitesApp.add_tipotramite %}
+                                        <th><center>REQUISITOS</center></th>
+                                        {% endif %}
+                                    </tr>
+                                </thead> 
+                                {% if data %}
+                                    {% for itemdata in data %} 
+                                    <tr><!--  codigo pa que meustre los datos, verifica si hay registro -->
+                                        <td><center>{{ itemdata.requisito }}</center></td>  
+                                    </tr> 
+                                    {% endfor %}
+                                {% else %}
+                                <tr style="text-align: center;"><!--   si no hay registro , no muestren datos ps -->
+                                    <td colspan="3">
+                                        <p>No hay Requisitos</p>
+                                    </td> 
+                                </tr>
+                                {% endif %}
+                            </table> 
+                        </table>          
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

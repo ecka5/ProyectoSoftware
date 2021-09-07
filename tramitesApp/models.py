@@ -21,18 +21,11 @@ class TipoTramite(models.Model):
     estado=models.BooleanField()
     def __str__(self):
         return self.tipoTramite
-
-class TipoRequisito(models.Model):
-    tipoRequisito=models.CharField(max_length=100)
-    tipoTramites=models.ForeignKey(TipoTramite,on_delete=models.CASCADE, null = True)
-    estado=models.BooleanField()
-    def __str__(self):
-        return self.tipoRequisito
     
 class Requisito(models.Model):
+    tipoTramite=models.ForeignKey(TipoTramite,on_delete=models.CASCADE, null = True)
     requisito=models.CharField(max_length=200)
     archivo=models.FileField(upload_to="requisito",blank = True, null = True) #no es obligatorio (por el tema del fut que no es para todos los trámites)
-    tipoRequisitos=models.ForeignKey(TipoRequisito,on_delete=models.CASCADE, null = True)
     estado=models.BooleanField()
     def __str__(self):
         return self.requisito

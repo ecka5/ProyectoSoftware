@@ -17,7 +17,7 @@
                         <div class="input-group">
                             <input type="text" name="buscar" id="buscar" class="form-control" autofocus placeholder="Buscar" value="">
                             <span class="input-group-btn">
-                            <button class="btn btn-primary">
+                            <button class="btn btn-primary btn-lg">
                             <i class="fa fa-search"></i>
                             </button>
                             </span>
@@ -25,7 +25,6 @@
                     </form>
                 </div> 
             </div>
-
             <table class="table mt-2">
                 <table id="tablasubfamilias" class="table table-striped mt-4" style="width:100%">
                     <thead class="bg-info text-white">
@@ -33,29 +32,16 @@
                             <th><center>#</center></th> 
                             <th><center>TIPO DE TRÁMITE</center></th>
                             {% if perms.tramitesApp.add_tipotramite %}
-                            <th><center>OPCIONES</center></th>
-                            {% endif %}
-                            {% if perms.tramitesApp.view_tipotramite %}
                             <th><center>REQUISITOS</center></th>
-                            {% endif %}
+                            {% endif %}                            
                         </tr>
                     </thead> 
                     {% if tipoT %}
                         {% for itemtipoT in tipoT %} 
                         <tr><!--  codigo pa que meustre los datos, verifica si hay registro -->
                             <td><center>{{ itemtipoT.id }}</center></td>
-                            <td><center>{{ itemtipoT.tipoTramite }}</center></td>                                     
-
-                            {% if perms.tramitesApp.add_tipotramite %}                            
-                            <td style="text-align: center;">
-                            <a href="{% url 'editartipostramites' itemtipoT.id %}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> Editar</a>
-                            <a href="#" onclick="eliminartipostramites('{{itemtipoT.id}}','{{itemtipoT.tipoTramite}}')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Eliminar</a>
-                            </td>
-                            {% endif %}
-                            {% if perms.tramitesApp.view_tipotramite %}      
-                            <td> <center><a href="#" class="btn btn-info btn-sm"><i class="fa fa-search mr-2"></i>Ver Requisitos</a> </center>
-                            </td> 
-                            {% endif %}    
+                            <td><center>{{ itemtipoT.tipoTramite }}</center></td>
+                            <td><center><button onclick="abrir_modal_mostrarrequisitos('{% url 'mostrarrequisitos' itemtipoT.id %}')" class="btn btn-info btn-sm"><i class="fa fa-search mr-2"></i>Requisitos</button></center></td>             
                         </tr> 
                         {% endfor %}
                     {% else %}
@@ -101,6 +87,10 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="mostrarrequisitos" role="dialgog">
+        
+    </div>
 </div>
 {% endblock %}
 
@@ -135,6 +125,41 @@
             window.location.href="/eliminartipostramites/"+id+"/"
         }
     })
+    };
+
+    $(function () {
+          $('button[name="idtipotramite"]').on('click',function(){
+              var id=$(this).val();
+              $.ajax({
+                  type: 'GET',
+                  data : {
+                    'action': 'search_requisitos',
+                    'id':id
+                  },
+              }).done(function (data) {
+                  /*$.alert({
+                      content: data,
+                  });*/
+                      console.log(data);
+                  if (!data.hasOwnProperty('error')){
+                    console.log(data);
+                    /*$.alert({
+                      content: data,
+                    });*/
+                    return false;
+                  }
+                  message_error(data.error);
+              }).fail(function (jqXHR,textStatus,errorThrown) {
+                  alert( textStatus + ': '+ errorThrown );
+              }).always(function (data) {         
+              });
+        });
+      });
+
+    function abrir_modal_mostrarrequisitos(url){
+        $('#mostrarrequisitos').load(url,function(){
+            $(this).modal('show');
+        });
     }
 </script>
 {% endblock %}

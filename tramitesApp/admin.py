@@ -1,5 +1,5 @@
 from django.contrib import admin
-from tramitesApp.models import Alumno,Requisito,TipoRequisito,TipoTramite,Tramite,EstadoTramite,BandejaTramite
+from tramitesApp.models import Alumno,Requisito,TipoTramite,Tramite,EstadoTramite,BandejaTramite
 
 # Register your models here.
 class AlumnoAdmin(admin.ModelAdmin):
@@ -10,12 +10,8 @@ class TipoTramiteAdmin(admin.ModelAdmin):
      list_display=['tipoTramite']
 admin.site.register(TipoTramite,TipoTramiteAdmin)
 
-class TipoRequisitoAdmin(admin.ModelAdmin):
-     list_display=("tipoRequisito","tipoTramites")
-admin.site.register(TipoRequisito,TipoRequisitoAdmin)
-
 class RequisitoAdmin(admin.ModelAdmin):
-     list_display=("requisito","archivo","tipoRequisitos")
+     list_display=("tipoTramite","requisito","archivo")
 admin.site.register(Requisito,RequisitoAdmin)
 
 class TramiteAdmin(admin.ModelAdmin):
