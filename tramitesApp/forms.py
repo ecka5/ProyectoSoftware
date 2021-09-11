@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import fields
-from .models import Alumno,Requisito,TipoTramite,Tramite,EstadoTramite,BandejaTramite
+from .models import Alumno,Requisito,TipoTramite,Tramite,EstadoTramite,BandejaTramite,Fut
 
 class AlumnoForm(forms.ModelForm): 
     class Meta:
@@ -20,7 +20,7 @@ class RequisitoForm(forms.ModelForm):
 class TramiteForm(forms.ModelForm): 
     class Meta:
         model=Tramite
-        fields='__all__'
+        fields=['tipoTramite','alumnos','archivo']
 
 class EstadoTramiteForm(forms.ModelForm): 
     class Meta:
@@ -30,4 +30,9 @@ class EstadoTramiteForm(forms.ModelForm):
 class BandejaTramiteForm(forms.ModelForm): 
     class Meta:
         model=BandejaTramite
+        fields='__all__'
+
+class FutForm(forms.ModelForm): 
+    class Meta:
+        model=Fut
         fields='__all__'

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from tramitesApp.models import Alumno,Requisito,TipoTramite,Tramite,EstadoTramite,BandejaTramite
+from tramitesApp.models import Alumno,Requisito,TipoTramite,Tramite,EstadoTramite,BandejaTramite,Fut
 
 # Register your models here.
 class AlumnoAdmin(admin.ModelAdmin):
@@ -11,11 +11,11 @@ class TipoTramiteAdmin(admin.ModelAdmin):
 admin.site.register(TipoTramite,TipoTramiteAdmin)
 
 class RequisitoAdmin(admin.ModelAdmin):
-     list_display=("tipoTramite","requisito","archivo")
+     list_display=("tipoTramite","requisito")
 admin.site.register(Requisito,RequisitoAdmin)
 
 class TramiteAdmin(admin.ModelAdmin):
-     list_display=("tipoTramite","alumnos")
+     list_display=("tipoTramite","alumnos","fechatram","archivo")
 admin.site.register(Tramite,TramiteAdmin)
 
 class EstadoTramiteAdmin(admin.ModelAdmin):
@@ -23,5 +23,9 @@ class EstadoTramiteAdmin(admin.ModelAdmin):
 admin.site.register(EstadoTramite,EstadoTramiteAdmin)
 
 class BandejaTramiteAdmin(admin.ModelAdmin):
-     list_display=("tramites","estadotramites","observacion","tiempo","fecha")
+     list_display=("tramites","estadotramites","observacion","tiempo","fechabandeja")
 admin.site.register(BandejaTramite,BandejaTramiteAdmin)
+
+class FutAdmin(admin.ModelAdmin):
+     list_display=("alumnos","tipoTramite")
+admin.site.register(Fut,FutAdmin)

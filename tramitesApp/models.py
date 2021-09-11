@@ -1,5 +1,5 @@
 from django.db import models
-
+import datetime
 # Create your models here.
 class Alumno(models.Model):
     nombres=models.CharField(max_length=40)
@@ -24,15 +24,16 @@ class TipoTramite(models.Model):
     
 class Requisito(models.Model):
     tipoTramite=models.ForeignKey(TipoTramite,on_delete=models.CASCADE, null = True)
-    requisito=models.CharField(max_length=200)
-    archivo=models.FileField(upload_to="requisito",blank = True, null = True) #no es obligatorio (por el tema del fut que no es para todos los trámites)
+    requisito=models.CharField(max_length=200)    
     estado=models.BooleanField()
     def __str__(self):
         return self.requisito
 
 class Tramite(models.Model):
     tipoTramite=models.ForeignKey(TipoTramite,on_delete=models.CASCADE)
-    alumnos=models.ForeignKey(Alumno,on_delete=models.CASCADE, null = True )
+    alumnos=models.ForeignKey(Alumno,on_delete=models.CASCADE, null = True)
+    fechatram = models.DateField(default=datetime.date.today,editable=False)
+    archivo=models.FileField(upload_to="requisito",null = True)
     estado=models.BooleanField(default=True)
     
 class EstadoTramite(models.Model):
@@ -46,7 +47,12 @@ class BandejaTramite(models.Model):
     estadotramites=models.ForeignKey(EstadoTramite,on_delete=models.CASCADE)
     observacion=models.CharField(max_length=200)
     tiempo=models.IntegerField()
-    fecha=models.DateTimeField()
+    fechabandeja=models.DateField(null = True )
     estado=models.BooleanField(default=True)
     def __str__(self):
         return self.observacion
+
+class Fut(models.Model):
+    alumnos=models.OneToOneField(Alumno,on_delete=models.CASCADE)
+    tipoTramite=models.ForeignKey(TipoTramite,on_delete=models.CASCADE)
+    estado=models.BooleanField()

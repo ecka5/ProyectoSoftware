@@ -1,0 +1,92 @@
+{% extends "plantilla.html" %}
+{% block content %}
+<div class="container">
+    <div class="card card-outline card-info mt-3">
+        <div class="card-header">
+            <h1 class="card-title">LISTADO DE TRAMITES</h1>
+            <a href="{% url 'agregartramites' %}" class='btn btn-sm btn-light btn-add'><i class='fas fa-plus'></i> NUEVO</a>
+        </div>
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-md-6 pull-right">
+                    <form action="" method="GET">
+                        <div class="input-group">
+                            <input type="text" name="buscar" id="buscar" class="form-control" autofocus placeholder="Buscar" value="">
+                            <span class="input-group-btn ">
+                            <button class="btn btn-primary btn-lg">
+                            <i class="fa fa-search"></i>
+                            </button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <table class="table mt-2">
+                <table id="tablasubfamilias" class="table table- striped mt4" style="width:100%">
+                    <thead class="bg-info text-white">
+                        <tr>
+                            <th><center>#</center></th> 
+                            <th><center>TIPO DE TRÁMITE</center></th>
+                            <th><center>OPCIONES</center></th>
+                        </tr>
+                    </thead> 
+                    {% if tramites %}
+                        {% for itemtramites in tramites %} 
+                        <tr><!--  codigo pa que meustre los datos, verifica si hay registro -->
+                            <td><center>{{ itemtramites.id }}</center></td>
+                            <td><center>{{ itemtramites.tipoTramite }}</center></td>
+                            <td style="text-align: center;">
+                                <a href="{% url 'editartramites' itemtramites.id %}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> Editar requisitos</a> 
+                            </td>   
+                        </tr> 
+                        {% endfor %}
+                    {% else %}
+                    <tr style="text-align: center;"><!--   si no hay registro , no muestren datos ps -->
+                        <td colspan="3">
+                            <p>No hay Registros</p>
+                        </td> 
+                    </tr>
+                    {% endif %}
+                </table>
+            </table>
+
+            <div class = "row mt-3 justify-content-center">
+                    <nav>
+                        <ul class="pagination">
+                            {% if tramites.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page=1">Primera</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ tramites.previous_page_number }}">&laquo;</a>
+                            </li>
+                            {% endif %}
+
+                            {% for pagina in paginas %}
+                                <li class="page-item{% if pagina_action == page %} active {% endif %}">
+                                    <a class="page-link" href="?page={{ pagina }}">{{ pagina }}</a>
+                                </li>
+                            {% endfor %}
+
+                            {% if tramites.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ tramites.next_page_number }}">&raquo;</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ tramites.paginator.num_pages }}">Última</a>
+                            </li>
+                            {% endif %}
+
+                        </ul>
+                    </nav>
+                </div>    
+            
+            </div>
+
+        </div>
+    </div>    
+</div>
+
+{% endblock %}

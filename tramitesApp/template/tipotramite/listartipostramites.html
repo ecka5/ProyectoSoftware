@@ -23,7 +23,10 @@
                             </span>
                         </div>         
                     </form>
-                </div> 
+                </div>
+                <div class="col-md-6">
+                    <button onclick="abrir_modal_modelodoc('{% url 'modelodoc' %}')" class="btn btn-danger btn-sm">Modelo documentos</button></center></td>
+                </div>
             </div>
             <table class="table mt-2">
                 <table id="tablasubfamilias" class="table table-striped mt-4" style="width:100%">
@@ -31,9 +34,8 @@
                         <tr>
                             <th><center>#</center></th> 
                             <th><center>TIPO DE TRÁMITE</center></th>
-                            {% if perms.tramitesApp.add_tipotramite %}
                             <th><center>REQUISITOS</center></th>
-                            {% endif %}                            
+                            
                         </tr>
                     </thead> 
                     {% if tipoT %}
@@ -42,6 +44,7 @@
                             <td><center>{{ itemtipoT.id }}</center></td>
                             <td><center>{{ itemtipoT.tipoTramite }}</center></td>
                             <td><center><button onclick="abrir_modal_mostrarrequisitos('{% url 'mostrarrequisitos' itemtipoT.id %}')" class="btn btn-info btn-sm"><i class="fa fa-search mr-2"></i>Requisitos</button></center></td>             
+                            
                         </tr> 
                         {% endfor %}
                     {% else %}
@@ -88,9 +91,8 @@
         </div>
     </div>
 
-    <div class="modal fade" id="mostrarrequisitos" role="dialgog">
-        
-    </div>
+    <div class="modal fade" id="mostrarrequisitos" role="dialgog"></div>
+    <div class="modal fade" id="modelodoc" role="dialgog"></div>
 </div>
 {% endblock %}
 
@@ -161,5 +163,10 @@
             $(this).modal('show');
         });
     }
+    function abrir_modal_modelodoc(url){
+                $('#modelodoc').load(url,function(){
+                    $(this).modal('show');
+                });
+      }
 </script>
 {% endblock %}

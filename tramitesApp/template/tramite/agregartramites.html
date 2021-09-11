@@ -1,0 +1,45 @@
+{% extends "plantilla.html" %}
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="container">
+    <div class="card card-info mx-4 my-4">
+        <div class="card-header">
+            <h1 class="card-title">NUEVO TRÁMITE</h1>
+        </div>
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form | crispy}}
+                <div class="d-flex justify-content-end">
+                    <a href="{% url 'listartramites' %}" class="btn btn-secondary">Cancelar</a>
+                    &nbsp;
+                    <button type="submit" class="btn btn-primary">Guardar</button> 
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <div class="modal fade" id="mostrarrequisitos" role="dialgog">
+        
+    </div>
+</div>
+{% endblock%}
+
+{% block js %}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+      $('#id_tipoTramite').change(function(){
+            var id_tipoTramite = $(this).val();
+            console.log(id_tipoTramite);
+
+        /*function abrir_modal_mostrarrequisitos(url){
+                $('#mostrarrequisitos').load('/mostrarrequisitos/'+ id_tipoTramite,function(){
+                $(this).modal('show');
+                });
+            }*/
+       });
+            
+</script>
+{% endblock %}
