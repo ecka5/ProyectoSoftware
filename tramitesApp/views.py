@@ -7,29 +7,43 @@ from django.views.generic import TemplateView
 from django.http.response import HttpResponse, JsonResponse
 from django.core.paginator import Paginator
 
-#PDF
-from django.template.loader import render_to_string
-from weasyprint import HTML
-from weasyprint.fonts import FontConfiguration
-# Create your views here.
+def listaralumno(request):    
+    if request.user.is_staff:
+        queryset=request.GET.get("buscar")
+        alumno=Alumno.objects.filter(estado=True)
+        
+        # paginación
+        paginator = Paginator(alumno,3)
+        pagina = request.GET.get("page") or 1
+        alumno = paginator.get_page(pagina)
+        pagina_actual = int(pagina)
+        paginas = range(1,alumno.paginator.num_pages +1)
+        if queryset:
+            alumno=Alumno.objects.filter(
+                Q(descripcion__icontains=queryset),estado=True
+            ).distinct()
+        # tb agregaremos la paginación
+        context={'alumno':alumno,'pagina':pagina,'paginas':paginas,'pagina_actual':pagina_actual} #pasa de la variable al dicciionario
+        
+        return render(request,"alumno/listaralumno.html",context)        
+    else:        
+        queryset=request.GET.get("buscar")
+        alumno=Alumno.objects.filter(user=request.user)         
+        # paginación
+        paginator = Paginator(alumno,3)
+        pagina = request.GET.get("page") or 1
+        alumno = paginator.get_page(pagina)
+        pagina_actual = int(pagina)
+        paginas = range(1,alumno.paginator.num_pages +1)
+        if queryset:
+            alumno=Alumno.objects.filter(
+                Q(descripcion__icontains=queryset),estado=True
+            ).distinct()
+        # tb agregaremos la paginación
+        context={'alumno':alumno,'pagina':pagina,'paginas':paginas,'pagina_actual':pagina_actual} #pasa de la variable al dicciionario
 
-def listaralumno(request):
-    queryset=request.GET.get("buscar")
-    alumno=Alumno.objects.filter(estado=True)
-    # paginación
-    paginator = Paginator(alumno,3)
-    pagina = request.GET.get("page") or 1
-    alumno = paginator.get_page(pagina)
-    pagina_actual = int(pagina)
-    paginas = range(1,alumno.paginator.num_pages +1)
-    if queryset:
-        alumno=Alumno.objects.filter(
-            Q(descripcion__icontains=queryset),estado=True
-        ).distinct()
-    # tb agregaremos la paginación
-    context={'alumno':alumno,'pagina':pagina,'paginas':paginas,'pagina_actual':pagina_actual} #pasa de la variable al dicciionario
-
-    return render(request,"alumno/listaralumno.html",context)
+        return render(request,"alumno/listaralumno.html",context)
+        
 
 def agregaralumno(request):
     if request.method=="POST":
@@ -194,25 +208,14 @@ def agregarfuts(request):
     context={'form':form}
     return render(request,"fut/agregarfuts.html",context)
 
-#FUT PDF
-def reportfut(request,id):
-    data = Fut.objects.filter(id=id).distinct
-    context = {'data':data}
-    html = render_to_string("report/reportfut.html",context)
-    
-    response=HttpResponse(content_type="application/pdf")
-    response["Content-Disposition"]="inline;report.pdf"
-    
-    font_config=FontConfiguration()
-    HTML(string=html).write_pdf(response,font_config=font_config)
-    return response
-
 
 #TRÁMITES
 
 def listartramites(request):
+    username=request.user 
     queryset=request.GET.get("buscar")
-    tramites=Tramite.objects.filter(estado=True)
+    alumno = Alumno.objects.get(user=username)
+    tramites=Tramite.objects.filter(estado=True,alumnos=alumno)
     requisito=Requisito.objects.filter(estado=True).distinct
     # paginación
     paginator = Paginator(tramites,4)
@@ -231,11 +234,15 @@ def listartramites(request):
 
 def agregartramites(request): 
     form=TramiteForm()
+    username=request.user 
     if request.method=="POST":
         form=TramiteForm(request.POST,files=request.FILES)
-        if form.is_valid():
-            form.estado=True
-            form.save()
+        if form.is_valid():          
+            formAlum = form.save(commit=False)
+            alumno = Alumno.objects.get(user=username)
+            formAlum.alumnos = alumno
+            formAlum.estado=True
+            formAlum.save()
             return redirect("listartramites")
     context={'form':form}
     return render(request,"tramite/agregartramites.html",context)

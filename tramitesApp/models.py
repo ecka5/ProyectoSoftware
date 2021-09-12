@@ -1,7 +1,9 @@
 from django.db import models
+from django.contrib.auth.models import User
 import datetime
 # Create your models here.
-class Alumno(models.Model):
+class Alumno(models.Model):    
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     nombres=models.CharField(max_length=40)
     apellidos=models.CharField(max_length=40)
     codigo=models.CharField(max_length=10)   
@@ -12,7 +14,7 @@ class Alumno(models.Model):
     facultad=models.CharField(default="INGENIERIA",max_length=10)
     escuela=models.CharField(default="INGENIERIA DE SISTEMAS",max_length=22)
     firma=models.ImageField(upload_to="alumno",null = True)
-    estado=models.BooleanField()
+    estado=models.BooleanField()    
     def __str__(self):
         return self.nombres
 
@@ -31,7 +33,7 @@ class Requisito(models.Model):
 
 class Tramite(models.Model):
     tipoTramite=models.ForeignKey(TipoTramite,on_delete=models.CASCADE)
-    alumnos=models.ForeignKey(Alumno,on_delete=models.CASCADE, null = True)
+    alumnos=models.ForeignKey(Alumno,on_delete=models.CASCADE)
     fechatram = models.DateField(default=datetime.date.today,editable=False)
     archivo=models.FileField(upload_to="requisito",null = True)
     estado=models.BooleanField(default=True)

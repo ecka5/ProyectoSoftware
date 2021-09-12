@@ -1,5 +1,5 @@
 from django.urls import path,include
-from tramitesApp.views import listaralumno, agregaralumno,editaralumno,eliminaralumno,listartipostramites,agregartipostramites,editartipostramites,eliminartipostramites,listarrequisitos,mostrarrequisitos,agregarrequisitos,listartramites,agregarfuts,agregartramites,requisitostramite,editartramites,modelodoc,listarfuts,reportfut
+from tramitesApp.views import listaralumno, agregaralumno,editaralumno,eliminaralumno,listartipostramites,agregartipostramites,editartipostramites,eliminartipostramites,listarrequisitos,mostrarrequisitos,agregarrequisitos,listartramites,agregarfuts,agregartramites,requisitostramite,editartramites,modelodoc,listarfuts
 from django.contrib.auth import views
 
 urlpatterns = [ 
@@ -28,9 +28,6 @@ urlpatterns = [
     #FUTS
     path('listarfuts/',listarfuts ,name="listarfuts"),
     path('agregarfuts/',agregarfuts, name="agregarfuts"),
-    
-    #REPORT_FUTS
-    path('reportfut/<int:id>/',reportfut,name="reportfut"),
     
     #MODAL MODELO DE DOCUMENTOS 
     path('modelodoc/',modelodoc, name="modelodoc"),

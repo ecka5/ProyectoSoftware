@@ -41,7 +41,16 @@ def registrar(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             try:
+                user = User.objects.create_user(username = form.cleaned_data['username'], 
+                                                first_name = form.cleaned_data['nombres'],
+                                                last_name = form.cleaned_data['apellidos'],
+                                                email=form.cleaned_data['email'], 
+                                                password=form.cleaned_data['password1'])
+                group = Group.objects.get(name='GrupoAlumno')
+                user.groups.add(group)
+                user.save()                  
                 alumno = Alumno()
+                alumno.user = user
                 alumno.nombres=form.cleaned_data['nombres']
                 alumno.apellidos=form.cleaned_data['apellidos']
                 alumno.codigo=form.cleaned_data['codigo']
@@ -53,14 +62,6 @@ def registrar(request):
                 alumno.escuela=form.cleaned_data['escuela']
                 alumno.estado=True
                 alumno.save()
-                user = User.objects.create_user(username = form.cleaned_data['username'], 
-                                                first_name = form.cleaned_data['nombres'],
-                                                last_name = form.cleaned_data['apellidos'],
-                                                email=form.cleaned_data['email'], 
-                                                password=form.cleaned_data['password1'])
-                group = Group.objects.get(name='GrupoAlumno')
-                user.groups.add(group)
-                user.save()  
                 messages.success(request, 'Se registro correctamente')    
                 return redirect("login")          
             except Exception as e:

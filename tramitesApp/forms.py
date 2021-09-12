@@ -20,7 +20,7 @@ class RequisitoForm(forms.ModelForm):
 class TramiteForm(forms.ModelForm): 
     class Meta:
         model=Tramite
-        fields=['tipoTramite','alumnos','archivo']
+        fields=['tipoTramite','archivo']
 
 class EstadoTramiteForm(forms.ModelForm): 
     class Meta:
