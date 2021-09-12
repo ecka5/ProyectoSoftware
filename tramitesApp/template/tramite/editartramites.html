@@ -8,11 +8,11 @@
         </div>
         <div class="card-body"> 
             <form action="" method="post" enctype="multipart/form-data" >
-                {% csrf_token %}
                 
-
-                <div class="col-md-6"> {{form | crispy}}</div>
-
+                {% csrf_token %}
+                <div class="col-md-6" hidden> {{form.tipoTramite | as_crispy_field }}</div>
+                <div class="col-md-6" hidden> {{form.alumnos | as_crispy_field }}</div>
+                <div class="col-md-6"> {{form.archivo | as_crispy_field }}</div>
                 <div class="d-flex justify-content-end">
                     <a href="{% url 'listartramites' %}" class="btn btn-secondary">Cancelar</a>
                     &nbsp;

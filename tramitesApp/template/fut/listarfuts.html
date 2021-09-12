@@ -5,9 +5,7 @@
     <div class="card card-outline card-info mt-3">
         <div class="card-header">    
             <h1 class="card-title"> <b>Lista de Futs</b>   </h1>      <br><br>
-            {% if perms.tramitesApp.add_tipotramite %}
             <a href="{% url 'agregarfuts' %}" class='btn btn-sm btn-light btn-add'><i class='fas fa-plus'></i> NUEVO</a>
-            {% endif %}  
         </div>
 
         <div class="card-body">        

@@ -59,7 +59,7 @@
                     </div>
                     <div class="info">
                     
-                        <a href="#" class="d-block">{{ user.get_username }}</a>
+                        <a href="#" class="d-block">{{ user.id }}</a>
                     </div>
                 </div>
                 <!-- Sidebar Menu -->
@@ -67,6 +67,7 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
                     with font-awesome or any other icon font library -->
+                    {% if 'GrupoSecretaria' == request.user.groups.all.0.name %}
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="fa fa-puzzle-piece"></i>
@@ -78,12 +79,7 @@
                                 <li class="nav-item">
                                     <a href="{% url 'listaralumno' %}" class="nav-link">
                                         <i class="fa fa-users"></i> 
-                                        {% if perms.tramitesApp.add_alumno or perms.tramitesApp.change_tramite %}
                                         <p>Alumnos /</p>
-                                        {% endif %}
-                                        {% if perms.tramitesApp.view_alumno and perms.tramitesApp.change_alumno %}
-                                        <p>Perfil</p>
-                                        {% endif %}
                                     </a>
                                 </li>
                                
@@ -93,26 +89,121 @@
                                         <p>Tipos de Trámites</p>
                                     </a>
                                 </li>
-                                {% if perms.tramitesApp.add_tipotramite %}
+                              
                                 <li class="nav-item">
                                     <a href="{% url 'listarrequisitos' %}" class="nav-link">
                                         <i class="fa fa-users"></i> 
                                         <p>Requisitos</p>
                                     </a>
                                 </li>
-                                {% endif %}
-                                {% if perms.tramitesApp.view_alumno and perms.tramitesApp.change_alumno %}
+                                
+                                <li class="nav-item">
+                                    <a href="{% url 'agregarfuts' %}" class="nav-link">
+                                        <i class="fa fa-users"></i> 
+                                        <p>Crear Fut</p>
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </li>
+                        {% endif %} 
+                        {% if 'GrupoAlumno' == request.user.groups.all.0.name %}
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fa fa-puzzle-piece"></i>
+                                <p>ALUMNO
+                                    <i class="right fas fa-angle-left"></i> 
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{% url 'listaralumno' %}" class="nav-link">
+                                        <i class="fa fa-users"></i> 
+                                        <p>Perfil</p>
+                                    </a>
+                                </li>
+                               
+                                <li class="nav-item">
+                                    <a href="{% url 'listartipostramites' %}" class="nav-link">
+                                        <i class="fa fa-users"></i> 
+                                        <p>Tipos de Trámites</p>
+                                    </a>
+                                </li>
                                 <li class="nav-item">
                                     <a href="{% url 'listarfuts' %}" class="nav-link">
                                         <i class="fa fa-users"></i> 
                                         <p>Crear Fut</p>
                                     </a>
                                 </li>
-                                {% endif %} 
                             </ul>
                         </li>
+                        {% endif %}
                         <!-- Opción Ventas -->
-                        {% if perms.tramitesApp.view_alumno and perms.tramitesApp.change_alumno %}
+                        {% if 'GrupoAlumno' == request.user.groups.all.0.name %}
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fa fa-puzzle-piece"></i>
+                                <p>
+                                PROCESO
+                                <i class="right fas fa-angle-left"></i> 
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{% url 'listartramites' %}" class="nav-link">
+                                        <i class="fa fa-users"></i> 
+                                        <p>Nuevo Trámite</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="fa fa-users"></i> 
+                                        <p>Trámites Pendientes</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        {% endif %}
+
+                        {% if 'GrupoAdministrador' == request.user.groups.all.0.name %}
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fa fa-puzzle-piece"></i>
+                                <p>MANTENEDOR
+                                    <i class="right fas fa-angle-left"></i> 
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{% url 'listaralumno' %}" class="nav-link">
+                                        <i class="fa fa-users"></i> 
+                                        <p>Alumnos /</p>
+                                    </a>
+                                </li>
+                               
+                                <li class="nav-item">
+                                    <a href="{% url 'listartipostramites' %}" class="nav-link">
+                                        <i class="fa fa-users"></i> 
+                                        <p>Tipos de Trámites</p>
+                                    </a>
+                                </li>
+                              
+                                <li class="nav-item">
+                                    <a href="{% url 'listarrequisitos' %}" class="nav-link">
+                                        <i class="fa fa-users"></i> 
+                                        <p>Requisitos</p>
+                                    </a>
+                                </li>
+                                
+                                <li class="nav-item">
+                                    <a href="{% url 'agregarfuts' %}" class="nav-link">
+                                        <i class="fa fa-users"></i> 
+                                        <p>Crear Fut</p>
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="fa fa-puzzle-piece"></i>

@@ -23,7 +23,7 @@
     </div>
     <div class="logo">
     </div>
-    <div class="content" style="background-color: #4275E8"> 
+    <div class="content" style="background-color: #344B7C"> 
         <form method="POST" action=""> 
             {% csrf_token %}
             <b><h3 class="form-title">Ingrese a la Plataforma</h3></b>
@@ -39,6 +39,8 @@
             </div>
             <hr/> 
                 <button class="btn btn-success btn-block">Ingresar </button> 
+                <br><b><p class="text-center">Antes de ingresar a la plataforma, regístrate </p></b>
+                <a href="{% url 'registrar' %}" class="btn btn-success btn-block"> Regístrate</a>
             <hr/>
         </form> 
     </div>
