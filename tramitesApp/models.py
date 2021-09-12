@@ -53,6 +53,7 @@ class BandejaTramite(models.Model):
         return self.observacion
 
 class Fut(models.Model):
-    alumnos=models.OneToOneField(Alumno,on_delete=models.CASCADE)
     tipoTramite=models.ForeignKey(TipoTramite,on_delete=models.CASCADE)
-    estado=models.BooleanField()
+    alumnos=models.OneToOneField(Alumno,on_delete=models.CASCADE)
+    objeto=models.CharField(max_length=500,null = True) 
+    estado=models.BooleanField(default=True,editable=False)

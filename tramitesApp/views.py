@@ -1,11 +1,16 @@
 from django.shortcuts import render,redirect
-from tramitesApp.models import Alumno, TipoTramite, Tramite,Requisito
+from tramitesApp.models import Alumno, TipoTramite, Tramite,Requisito,Fut
 from django.db.models import Q
 from .forms import AlumnoForm,TipoTramiteForm,RequisitoForm,FutForm, TramiteForm
 from django.core.paginator import Paginator
 from django.views.generic import TemplateView
 from django.http.response import HttpResponse, JsonResponse
 from django.core.paginator import Paginator
+
+#PDF
+from django.template.loader import render_to_string
+from weasyprint import HTML
+from weasyprint.fonts import FontConfiguration
 # Create your views here.
 
 def listaralumno(request):
@@ -159,11 +164,48 @@ def mostrarrequisitos(request,id):
     
 #FUTS
 
+def listarfuts(request):
+    queryset=request.GET.get("buscar")
+    fut=Fut.objects.filter(estado=True)
+    alumno=Alumno.objects.filter(estado=True).distinct
+    # paginación
+    paginator = Paginator(fut,4)
+    pagina = request.GET.get("page") or 1
+    fut = paginator.get_page(pagina)
+    pagina_actual = int(pagina)
+    paginas = range(1,fut.paginator.num_pages +1)
+    if queryset:
+        fut=Fut.objects.filter(
+            Q(fut__icontains=queryset),estado=True
+        ).distinct()
+    # tb agregaremos la paginación
+    context={'fut':fut,'alumno':alumno,'pagina':pagina,'paginas':paginas,'pagina_actual':pagina_actual} #pasa de la variable al dicciionario
+
+    return render(request,"fut/listarfuts.html",context)
+
 def agregarfuts(request):
-    alumnos=Alumno.objects.filter(estado=True)
-    tipoT=TipoTramite.objects.filter(estado=True).distinct
-    context={'alumnos':alumnos,'tipoT':tipoT}
+    form=FutForm()
+    if request.method=="POST":
+        form=FutForm(request.POST)
+        if form.is_valid():
+            form.estado=True
+            form.save()
+            return redirect("listarfuts")
+    context={'form':form}
     return render(request,"fut/agregarfuts.html",context)
+
+#FUT PDF
+def reportfut(request,id):
+    data = Fut.objects.filter(id=id).distinct
+    context = {'data':data}
+    html = render_to_string("report/reportfut.html",context)
+    
+    response=HttpResponse(content_type="application/pdf")
+    response["Content-Disposition"]="inline;report.pdf"
+    
+    font_config=FontConfiguration()
+    HTML(string=html).write_pdf(response,font_config=font_config)
+    return response
 
 
 #TRÁMITES

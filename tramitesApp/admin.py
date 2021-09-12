@@ -27,5 +27,5 @@ class BandejaTramiteAdmin(admin.ModelAdmin):
 admin.site.register(BandejaTramite,BandejaTramiteAdmin)
 
 class FutAdmin(admin.ModelAdmin):
-     list_display=("alumnos","tipoTramite")
+     list_display=("alumnos","tipoTramite","objeto")
 admin.site.register(Fut,FutAdmin)
