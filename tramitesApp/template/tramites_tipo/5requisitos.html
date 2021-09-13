@@ -1,0 +1,138 @@
+{% extends "plantilla.html" %}
+{% block content %}
+<div class="container">
+    <div class="card card-outline card-info mt-3">
+        <div class="card-header">
+            <div class="row">
+                <div class="col">
+                    <h1 class="card-title"> <b></b>  </h1>
+                </div>               
+            </div>
+        </div>   
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <form method="post" action="/savetramite/" enctype="multipart/form-data" >
+                        {% csrf_token %}
+                        
+                                <div class="row">
+                                    <div class="col">
+                                        <h1> <b>{{ tipo.tipoTramite }}</b></h1>      
+                                    </div>
+                                    <div class="col" style="display: none; align-items: center;">
+                                        <input type="text" name="abreviatura_tipoTramite" value="{{ tipo.abreviatura_tipoTramite }}">        
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-4">
+                                        <label for="exampleInputDate">Fecha: </label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <input type="date" class="form-control"  name="fecha_tramite" >
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="documento">{{ req1 }}</label>
+                                        <div class="input-group">
+                                            <input type="file" name="id_requisito1" class="custom-file-input clearablefileinput form-control-file" id="id_requisito1" lang="es">
+                                            <label class="custom-file-label" for="id_requisito1" id="id_requisito1_label"></label>
+                                        </div>
+                                    </div>
+                                
+                                    <div class="col">
+                                        <label for="documento">{{ req2 }}</label>
+                                        <div class="input-group">
+                                            <input type="file" name="id_requisito2" class="custom-file-input clearablefileinput form-control-file" id="id_requisito2" lang="es">
+                                            <label class="custom-file-label" for="id_requisito2" id="id_requisito2_label"></label>
+                                        </div>
+                                    </div>
+                                
+                                    <div class="col">
+                                        <label for="documento">{{ req3 }}</label>
+                                        <div class="input-group">
+                                            <input type="file" name="id_requisito3" class="custom-file-input clearablefileinput form-control-file" id="id_requisito3" lang="es">
+                                            <label class="custom-file-label" for="id_requisito3" id="id_requisito3_label"></label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="documento">{{ req4 }}</label>
+                                        <div class="input-group">
+                                            <input type="file" name="id_requisito4" class="custom-file-input clearablefileinput form-control-file" id="id_requisito4" lang="es">
+                                            <label class="custom-file-label" for="id_requisito4" id="id_requisito4_label"></label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <label for="documento">{{ req5 }}</label>
+                                        <div class="input-group">
+                                            <input type="file" name="id_requisito5" class="custom-file-input clearablefileinput form-control-file" id="id_requisito5" lang="es">
+                                            <label class="custom-file-label" for="id_requisito4" id="id_requisito5_label"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                    
+                                <div class="row">
+                                    <div class="col">
+                                        <a href="{% url 'nuevotramite' %}" class="btn btn-secondary">Cancelar</a>
+                                        <input class='btn  btn-success btn-add' type="submit" value="Solicitar trámite">    
+                                    </div>
+                                </div>
+                    
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  
+  
+{% endblock%}
+
+{% block js %}
+<script type="text/javascript" >
+
+    let id_requisito1 = document.getElementById("id_requisito1")
+    id_requisito1.onchange = function() {
+        let input = document.getElementById("id_requisito1")
+        let label = document.getElementById("id_requisito1_label")
+        let fileName = input.value;
+        label.innerHTML = fileName.split('fakepath\\')[1];
+    }
+    let id_requisito2 = document.getElementById("id_requisito2")
+    id_requisito2.onchange = function() {
+        let input = document.getElementById("id_requisito2")
+        let label = document.getElementById("id_requisito2_label")
+        let fileName = input.value;
+        label.innerHTML = fileName.split('fakepath\\')[1];
+    }
+    let id_requisito3 = document.getElementById("id_requisito3")
+    id_requisito3.onchange = function() {
+        let input = document.getElementById("id_requisito3")
+        let label = document.getElementById("id_requisito3_label")
+        let fileName = input.value;
+        label.innerHTML = fileName.split('fakepath\\')[1];
+    }
+    let id_requisito4 = document.getElementById("id_requisito4")
+    id_requisito4.onchange = function() {
+        let input = document.getElementById("id_requisito4")
+        let label = document.getElementById("id_requisito4_label")
+        let fileName = input.value;
+        label.innerHTML = fileName.split('fakepath\\')[1];
+    }
+    let id_requisito5 = document.getElementById("id_requisito5")
+    id_requisito5.onchange = function() {
+        let input = document.getElementById("id_requisito5")
+        let label = document.getElementById("id_requisito5_label")
+        let fileName = input.value;
+        label.innerHTML = fileName.split('fakepath\\')[1];
+    }
+</script>
+{% endblock js %}

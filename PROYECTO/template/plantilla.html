@@ -71,39 +71,35 @@
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="fa fa-puzzle-piece"></i>
-                                <p>MANTENEDOR
+                                <p>VISUALIZAR OPCIONES
                                     <i class="right fas fa-angle-left"></i> 
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{% url 'listaralumno' %}" class="nav-link">
-                                        <i class="fa fa-users"></i> 
-                                        <p>Alumnos /</p>
-                                    </a>
-                                </li>
                                
                                 <li class="nav-item">
                                     <a href="{% url 'listartipostramites' %}" class="nav-link">
                                         <i class="fa fa-users"></i> 
-                                        <p>Tipos de Trámites</p>
+                                        <p>TRÁMITES / REQUISITOS</p>
                                     </a>
-                                </li>
-                              
+                                </li>                               
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fa fa-puzzle-piece"></i>
+                                <p>BANDEJA DE ENTRADA
+                                    <i class="right fas fa-angle-left"></i> 
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                               
                                 <li class="nav-item">
-                                    <a href="{% url 'listarrequisitos' %}" class="nav-link">
+                                    <a href="{% url 'secre' %}" class="nav-link">
                                         <i class="fa fa-users"></i> 
-                                        <p>Requisitos</p>
+                                        <p>BANDEJA DE TRÁMITES</p>
                                     </a>
-                                </li>
-                                
-                                <li class="nav-item">
-                                    <a href="{% url 'agregarfuts' %}" class="nav-link">
-                                        <i class="fa fa-users"></i> 
-                                        <p>Crear Fut</p>
-                                    </a>
-                                </li>
-                                
+                                </li>                               
                             </ul>
                         </li>
                     {% endif %} 
@@ -112,7 +108,7 @@
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="fa fa-puzzle-piece"></i>
-                                <p>ALUMNO
+                                <p>OPCIONES
                                     <i class="right fas fa-angle-left"></i> 
                                 </p>
                             </a>
@@ -151,13 +147,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{% url 'listartramites' %}" class="nav-link">
+                                    <a href="{% url 'nuevotramite' %}" class="nav-link">
                                         <i class="fa fa-users"></i> 
                                         <p>Nuevo Trámite</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="{% url 'listartramites' %}" class="nav-link">
                                         <i class="fa fa-users"></i> 
                                         <p>Trámites Pendientes</p>
                                     </a>
@@ -165,6 +161,26 @@
                             </ul>
                         </li>
                     {% endif %}
+
+                    {% if 'GrupoDirector' == request.user.groups.all.0.name %}
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fa fa-puzzle-piece"></i>
+                                <p>BANDEJA DE ENTRADA
+                                    <i class="right fas fa-angle-left"></i> 
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                               
+                                <li class="nav-item">
+                                    <a href="{% url 'direc' %}" class="nav-link">
+                                        <i class="fa fa-users"></i> 
+                                        <p>BANDEJA DE TRÁMITES</p>
+                                    </a>
+                                </li>                               
+                            </ul>
+                        </li>
+                    {% endif %} 
 
                     {% if 'GrupoAdministrador' == request.user.groups.all.0.name %}
                         <li class="nav-item">

@@ -1,0 +1,85 @@
+{% extends "plantilla.html" %}
+{% block content %}
+<div class="container">
+    <div class="card card-outline card-info mt-3">
+        <div class="card-header">
+            <div class="row">
+                <div class="col">
+                    <h1 class="card-title"> <b>Bandeja de Entrada</b>  </h1>
+                </div>               
+            </div>
+        </div>   
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <table class="table mt-2">
+                        <table id="tablasubfamilias" class="table table- striped mt4" style="width:100%">
+                            <thead class="bg-info text-white">
+                                <tr><center></center></tr>
+                                <tr>
+                                    <th><center>#</center></th> 
+                                    <th><center>ALUMNO</center></th>
+                                    <th><center>FECHA TRÁMITE</center></th>                    
+                                    <th><center>TRÁMITE</center></th>                 
+                                    <th><center>ESTADO</center></th>
+
+                                </tr>
+                            </thead> 
+                            {% if tramites %}
+                                {% for itemtramites in tramites %} 
+                                <tr> 
+                                    <td><center>{{ itemtramites.id }}</center></td>
+                                    <td><center>{{ itemtramites.alumnos.apellidos }} {{ itemtramites.alumnos.nombres }}</center></td>
+                                    <td><center>{{ itemtramites.fechatram }}</center></td>
+                                    <td><center>{{ itemtramites.tipoTramite.tipoTramite }}</center></td>
+                                    
+                                        {% if itemtramites.estado == "VERIFICADO" %}
+                                        <td><center>
+                                            <a href="/visadod/{{itemtramites.id}}" class='btn btn-sm btn-success btn-add'><i class='fas fa-check'></i>Visar</a>
+                                            <a href="/rechazadod/{{itemtramites.id}}"class='btn btn-sm btn-danger btn-add'><i class='fas fa-times'></i>Rechazar</a>
+                                        </center></td>                    
+                                        {% elif itemtramites.estado == "VISADO" %}
+                                            <td><center>
+                                                <p style="color: blue;"> <b> VISADO </b> </p>                                                
+                                            </center>   </td> 
+                                        {% elif itemtramites.estado == "RECHAZADO" %}
+                                            <td><center>
+                                                <p style="color: red;"> <b> RECHAZADO </b> </p>
+                                            </center> </td>   
+                                        {% else %}
+
+                                        {% endif%}
+                                    
+                                </tr> 
+                                {% endfor %}
+                            {% else %}  
+                            <tr style="text-align: center;"><!--   si no hay registro , no muestren datos ps -->
+                                <td colspan="3">
+                                    <p>No hay Registros</p>
+                                </td> 
+                            </tr>
+                            {% endif %}
+                        </table>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  
+{% endblock%}
+
+{% block js %}
+<script type="text/javascript" >
+    function downloadURI(boton) 
+    {
+        ruta=boton.getAttribute("ruta")
+        url=boton.getAttribute("url")
+        nombre=ruta.split('tramite/')[1];
+        var link = document.createElement("a");
+        link.download = nombre;
+        link.href = url;
+        link.click();
+    }
+</script>
+{% endblock %}

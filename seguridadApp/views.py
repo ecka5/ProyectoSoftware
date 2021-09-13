@@ -17,8 +17,16 @@ def acceder(request):
             password=form.cleaned_data.get("password")
             usuario=authenticate(username=nombre_usuario,password=password)
             if usuario is not None:
-                login(request,usuario) 
-                return redirect("home")
+                if usuario.groups.filter(name='GrupoSecretaria') or usuario.groups.filter(name='GrupoDirector'):
+                    if usuario.groups.filter(name='GrupoSecretaria'):
+                        login(request,usuario) 
+                        return redirect("secre")
+                    else:
+                        login(request,usuario)
+                        return redirect("direc")
+                else:
+                    login(request,usuario)
+                    return redirect("home")
             else:
                 messages.error(request,"Los datos son incorrectos")
         else:

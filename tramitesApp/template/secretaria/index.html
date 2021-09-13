@@ -5,63 +5,35 @@
         <div class="card-header">
             <div class="row">
                 <div class="col">
-                    <h1 class="card-title"> <b>TRÁMITES PENDIENTES</b>  </h1>
-                </div>
+                    <h1 class="card-title"> <b>Bandeja de Entrada</b>  </h1>
+                </div>               
             </div>
         </div>   
         <div class="card-body">
             <div class="row">
-                <div class="col-md-6 pull-right">
-                    <form action="" method="GET">
-                        <div class="input-group">
-                            <input type="text" name="buscar" id="buscar" class="form-control" autofocus placeholder="Buscar" value="">
-                            <span class="input-group-btn ">
-                            <button class="btn btn-primary btn-lg">
-                            <i class="fa fa-search"></i>
-                            </button>
-                            </span>
-                        </div>
-                    </form>
-                </div>
-            </div>
+                <div class="col">
 
-            <table class="table mt-2">
-                <table id="tablasubfamilias" class="table table- striped mt4" style="width:100%">
-                    <thead class="bg-info text-white">
-                        <tr>
-                            <th><center>#</center></th> 
-                            <th><center>FECHA TRÁMITE</center></th>                 
-                            <th><center>TRÁMITE</center></th>                        
-                            <th><center>ESTADO</center></th>
-                            <th><center>DOCUMENTOS PRESENTADOS</center></th>
-                        </tr>
-                    </thead> 
-                    {% if tramites %}
-                        {% for itemtramites in tramites %} 
-                        <tr> 
-                            <td><center>{{ itemtramites.id }}</center></td>
-                            <td><center>{{ itemtramites.fechatram }}</center></td>
-                            <td><center>{{ itemtramites.tipoTramite.tipoTramite }}</center></td>   
-                                    {% if itemtramites.estado == "CREADO" %}
-                                        <td><center>
-                                            <p style="color: slateblue;"> <b> CREADO </b> </p>
-                                        </center> </td>    
-                                    {% elif itemtramites.estado == "VERIFICADO" %}
-                                        <td><center>                                             
-                                            <p style="color: green;"> <b> VERIFICADO </b> </p>
-                                        </center> </td>   
-                                    {% elif itemtramites.estado == "RECHAZADO" %}
-                                        <td><center>                                             
-                                            <p style="color: red;"> <b> RECHAZADO </b> </p>
-                                        </center> </td>       
-                                    {% elif itemtramites.estado == "VISADO" %}
-                                        <td><center>
-                                            <p style="color: blue;"> <b> VISADO </b> </p>
-                                        </center> </td>             
-                                    {% else %}
+                    <table class="table mt-2">
+                        <table id="tablasubfamilias" class="table table- striped mt4" style="width:100%">
+                            <thead class="bg-info text-white">
+                                <tr>
+                                    <th><center>#</center></th> 
+                                    <th><center>ALUMNO</center></th>
+                                    <th><center>FECHA TRÁMITE</center></th>                    
+                                    <th><center>TRÁMITE</center></th>                        
+                                    <th><center>DOCUMENTOS PRESENTADOS</center></th>  
+                                    <th><center>ESTADO</center></th>
         
-                                    {% endif%}
-                            <td>
+                                </tr>
+                            </thead> 
+                            {% if tramites %}
+                                {% for itemtramites in tramites %} 
+                                <tr> 
+                                    <td><center>{{ itemtramites.id }}</center></td>
+                                    <td><center>{{ itemtramites.alumnos.apellidos }} {{ itemtramites.alumnos.nombres }}</center></td>
+                                    <td><center>{{ itemtramites.fechatram }}</center></td>
+                                    <td><center>{{ itemtramites.tipoTramite.tipoTramite }}</center></td>                    
+                                    <td>
                                         {% if itemtramites.tipoTramite.abreviatura_tipoTramite == "RM" %}    
                                         <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito1.url }}" ruta="{{ itemtramites.file_tramite.requisito1 }}" class="btn btn-block btn-primary"><i class="fas fa-download mr-2"></i>Descargar Requisito 1</button>
                                         <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito2.url }}" ruta="{{ itemtramites.file_tramite.requisito2 }}" class="btn btn-block btn-primary"><i class="fas fa-download mr-2"></i>Descargar Requisito 2</button>
@@ -94,100 +66,50 @@
                                         <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito7.url }}" ruta="{{ itemtramites.file_tramite.requisito7 }}" class="btn btn-block btn-primary"><i class="fas fa-download mr-2"></i>Descargar Requisito 7</button>
                                         <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito8.url }}" ruta="{{ itemtramites.file_tramite.requisito8 }}" class="btn btn-block btn-primary"><i class="fas fa-download mr-2"></i>Descargar Requisito 8</button>
                                     </td>  
+                                    {% else %}
+                                    {% endif %} 
+                                    <!-- botón del visado -->  
+                                    {% if itemtramites.estado == "CREADO" %}
+                                        <td><center>
+                                            <a href="/verificado/{{itemtramites.id}}" class='btn btn-sm btn-success btn-add'><i class='fas fa-check'></i>Verificar</a>
+                                            <a href="/rechazado/{{itemtramites.id}}" class='btn btn-sm btn-danger btn-add'><i class='fas fa-times'></i>Rechazar</a>
+                                        </center></td>                    
+                                    {% elif itemtramites.estado == "VERIFICADO" %}
+                                        <td><center>
+                                            <p style="color: green;"> <b> VERIFICADO </b> </p>
+                                        </center> </td>    
+                                    {% elif itemtramites.estado == "RECHAZADO" %}
+                                        <td><center>                                             
+                                            <p style="color: red;"> <b> RECHAZADO </b> </p>
+                                        </center> </td>   
+                                    {% elif itemtramites.estado == "VISADO" %}
+                                        <td><center>
+                                            <p style="color: blue;"> <b> VISADO </b> </p>
+                                        </center> </td>             
+                                    {% else %}
+        
+                                    {% endif%}
+                                    
+                                </tr> 
+                                {% endfor %}
                             {% else %}
-                            {% endif %}   
-                            <td>                            
-                        </tr> 
-                        {% endfor %}
-                    {% else %}
-                    <tr style="text-align: center;"><!--   si no hay registro , no muestren datos ps -->
-                        <td colspan="3">
-                            <p>No hay Registros</p>
-                        </td> 
-                    </tr>
-                    {% endif %}
-                </table>
-            </table>
-            
-            <div class = "row mt-3 justify-content-center">
-                    <nav>
-                        <ul class="pagination">
-                            {% if tramites.has_previous %}
-                            <li class="page-item">
-                                <a class="page-link" href="?page=1">Primera</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="?page={{ tramites.previous_page_number }}">&laquo;</a>
-                            </li>
+                            <tr style="text-align: center;"><!--   si no hay registro , no muestren datos ps -->
+                                <td colspan="3">
+                                    <p>No hay Registros</p>
+                                </td> 
+                            </tr>
                             {% endif %}
+                        </table>
+                    </table>
 
-                            {% for pagina in paginas %}
-                                <li class="page-item{% if pagina_action == page %} active {% endif %}">
-                                    <a class="page-link" href="?page={{ pagina }}">{{ pagina }}</a>
-                                </li>
-                            {% endfor %}
-
-                            {% if tramites.has_next %}
-                            <li class="page-item">
-                                <a class="page-link" href="?page={{ tramites.next_page_number }}">&raquo;</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="?page={{ tramites.paginator.num_pages }}">Última</a>
-                            </li>
-                            {% endif %}
-
-                        </ul>
-                    </nav>
-                </div>    
-            
+                </div>
             </div>
-
+           
         </div>
-    </div>    
-</div>
-
-<div class="modal fade" id="modalResolucion" tabindex="-1" role="dialog" aria-labelledby="modalResolucionLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <form method="post" action="/tipoTramite/" enctype="multipart/form-data" >
-        {% csrf_token %}
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalVisar_h5">Nuevo trámite</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-
-                <div class="modal-body">
-                    <div class="form-row">
-                        <div class="col">
-                            <select class="form-select" aria-label="Default select example" name="abreviatura_tipoTramite">
-                                <option selected>- Elige el nuevo trámite a elegir - </option>
-                                {% if tipoTramite %}
-                                    {% for itemtipoTramite in tipoTramite %} 
-                                        <option value="{{ itemtipoTramite.abreviatura_tipoTramite }}">{{ itemtipoTramite.tipoTramite }}</option>
-                                    {% endfor %}
-                                {% else %}
-                                        
-                                {% endif %}
-                            </select>                
-                        </div>
-                    </div> 
-                    
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <input class='btn  btn-success btn-add' type="submit" value="Crear trámite">
-                </div>
-
-            </div>
-        </form>
     </div>
 </div>
-
-{% endblock %}
-
+  
+{% endblock%}
 
 {% block js %}
 <script type="text/javascript" >
