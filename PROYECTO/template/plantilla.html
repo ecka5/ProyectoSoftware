@@ -106,8 +106,9 @@
                                 
                             </ul>
                         </li>
-                        {% endif %} 
-                        {% if 'GrupoAlumno' == request.user.groups.all.0.name %}
+                    {% endif %} 
+
+                    {% if 'GrupoAlumno' == request.user.groups.all.0.name %}
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="fa fa-puzzle-piece"></i>
@@ -137,9 +138,9 @@
                                 </li>
                             </ul>
                         </li>
-                        {% endif %}
-                        <!-- Opción Ventas -->
-                        {% if 'GrupoAlumno' == request.user.groups.all.0.name %}
+                    {% endif %}
+
+                    {% if 'GrupoAlumno' == request.user.groups.all.0.name %}
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="fa fa-puzzle-piece"></i>
@@ -163,9 +164,9 @@
                                 </li>
                             </ul>
                         </li>
-                        {% endif %}
+                    {% endif %}
 
-                        {% if 'GrupoAdministrador' == request.user.groups.all.0.name %}
+                    {% if 'GrupoAdministrador' == request.user.groups.all.0.name %}
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="fa fa-puzzle-piece"></i>
@@ -193,19 +194,10 @@
                                         <i class="fa fa-users"></i> 
                                         <p>Requisitos</p>
                                     </a>
-                                </li>
-                                
-                                <li class="nav-item">
-                                    <a href="{% url 'agregarfuts' %}" class="nav-link">
-                                        <i class="fa fa-users"></i> 
-                                        <p>Crear Fut</p>
-                                    </a>
-                                </li>
-                                
+                                </li>                               
                             </ul>
                         </li>
-
-                        {% endif %}
+                    {% endif %}
                     <!-- Fin de Ventas --> 
                     </ul>
                 </nav>

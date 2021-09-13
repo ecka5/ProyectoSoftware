@@ -27,7 +27,6 @@
                 <table id="tablasubfamilias" class="table table-striped mt-4" style="width:100%">
                     <thead class="bg-info text-white">
                         <tr>
-                            <th><center>#</center></th> 
                             <th><center>TIPO DE TRÁMITE</center></th>
                             <th><center>IMPRIMIR FUT</center></th>
                             
@@ -36,8 +35,8 @@
                     {% if fut %}
                         {% for itemfut in fut %} 
                         <tr><!--  codigo pa que meustre los datos, verifica si hay registro -->
-                            <td><center>{{ itemfut.id }}</center></td>
                             <td><center>{{ itemfut.tipoTramite }}</center></td>                            
+                            <td><center><a href="{% url 'reportfut' itemfut.id %}" class="btn btn-info btn-m" ><i class="fa fa-file-pdf mr-2" aria-hidden="true"></i> Visualizar PDF</a></center></td>                            
                         </tr> 
                         {% endfor %}
                     {% else %}

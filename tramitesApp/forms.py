@@ -35,4 +35,4 @@ class BandejaTramiteForm(forms.ModelForm):
 class FutForm(forms.ModelForm): 
     class Meta:
         model=Fut
-        fields='__all__'
+        fields=['tipoTramite','objeto']

@@ -1,18 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     {% load static %}
-    <meta charset="UTF-8">
+    <!-- meta tags -->
+    <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>::SISTEMA DE TRÁMITE DOCUMENTARIO::.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <meta name="keywords" content="Art Sign Up Form Responsive Widget, Audio and Video players, Login Form Web Template, Flat Pricing Tables, Flat Drop-Downs, Sign-Up Web Templates,Flat Web Templates, Login Sign-up Responsive Web Template, Smartphone Compatible Web Template, Free Web Designs for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design"/>
+    
+    <!-- /meta tags -->
+    <!-- custom style sheet -->
+    <link href="{% static 'loginmodern/css/style.css' %}" rel="stylesheet" type="text/css">
+    <!-- /custom style sheet -->
+    <!-- fontawesome css -->
+    <link href="{% static 'loginmodern/css/fontawesome-all.css' %}" rel="stylesheet">
+    <!-- /fontawesome css -->
+    <!-- google fonts-->
+    <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <!-- /google fonts-->
     <link rel="stylesheet" href="{% static 'login/css/login.css' %}">
     <link rel="stylesheet" href="{% static 'login/css/style.css' %}"> 
 </head>
-<body class="login"> 
+
+
+<body>
     {% load crispy_forms_tags %}
-    <div class="container mt-3">
+    
+    <h1>Trámite Documentario - UNT</h1>
+    <div class=" w3l-login-form">
+        <h2><b>Ingrese a la Plataforma</b></h2>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <center>
+                <img src="{% static 'login/img/logo.png' %}" alt="Sistema de Ventas & ABC" style="width: 50%"><br>
+            </center>
+            <div class=" w3l-form-group">
+                <label>Username:</label>
+                <div class="group">
+                    <i class="fas fa-user"></i>
+                    {{ form.username}} 
+                </div>
+            </div>
+            <div class=" w3l-form-group">
+                <label>Password:</label>
+                <div class="group">
+                    <i class="fas fa-unlock"></i>
+                    {{ form.password }}
+                </div>
+            </div>
+            <!--<div class="forgot">
+                <a href="#">Forgot Password?</a>
+                <p><input type="checkbox">Remember Me</p>
+            </div>-->
+            <button type="submit">Login</button>
+        </form>
+        <p class=" w3l-register-p"> ¿No tienes una cuenta? &nbsp;&nbsp;&nbsp;&nbsp;<a href="{% url 'registrar' %}" class="btn btn-success btn-block">Regístrate</a></p>
+    </div>
+    <footer>
+        <p class="copyright-agileinfo"> 2021 &copy; Sistema de Trámite Documentario - UNT. </p>
+    </footer>
+<div class="container mt-3">
         {% if messages %}
             {% for message in messages %}
                 <div class="alert alert-{{ message.tags}}">
@@ -21,33 +70,9 @@
             {% endfor %}
         {% endif%}
     </div>
-    <div class="logo">
-    </div>
-    <div class="content" style="background-color: #344B7C"> 
-        <form method="POST" action=""> 
-            {% csrf_token %}
-            <b><h3 class="form-title">Ingrese a la Plataforma</h3></b>
-            <center>
-                <img src="{% static 'login/img/logo.png' %}" alt="Sistema de Ventas & ABC" style="height: 80px;"><br>
-                <br><h6>Trámite Documentario - UNT</h6>
-            </center>
-            <br><div class="form-group">
-                {{ form.username | as_crispy_field }} 
-            </div>
-             <div class="form-group"> 
-                {{ form.password | as_crispy_field }} 
-            </div>
-            <hr/> 
-                <button class="btn btn-success btn-block">Ingresar </button> 
-                <br><b><p class="text-center">Antes de ingresar a la plataforma, regístrate </p></b>
-                <a href="{% url 'registrar' %}" class="btn btn-success btn-block"> Regístrate</a>
-            <hr/>
-        </form> 
-    </div>
-    <div class="copyright">
-        2021 &copy; Sistema de Trámite Documentario - UNT.
-    </div>
-    <script src="https://code.jquery.com/jquery3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>  
+<script src="https://code.jquery.com/jquery3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
 </body>
+
 </html>

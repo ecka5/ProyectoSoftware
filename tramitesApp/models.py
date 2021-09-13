@@ -57,5 +57,6 @@ class BandejaTramite(models.Model):
 class Fut(models.Model):
     tipoTramite=models.ForeignKey(TipoTramite,on_delete=models.CASCADE)
     alumnos=models.OneToOneField(Alumno,on_delete=models.CASCADE)
-    objeto=models.CharField(max_length=500,null = True) 
+    objeto=models.CharField(max_length=500,null = True)
+    fecha = models.DateField(default=datetime.date.today,editable=False) 
     estado=models.BooleanField(default=True,editable=False)

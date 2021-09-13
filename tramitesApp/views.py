@@ -7,6 +7,14 @@ from django.views.generic import TemplateView
 from django.http.response import HttpResponse, JsonResponse
 from django.core.paginator import Paginator
 
+#PDF
+from django.template.loader import render_to_string
+from weasyprint import HTML
+from weasyprint.fonts import FontConfiguration
+
+
+#ALUMNOS
+
 def listaralumno(request):    
     if request.user.is_staff:
         queryset=request.GET.get("buscar")
@@ -44,7 +52,6 @@ def listaralumno(request):
 
         return render(request,"alumno/listaralumno.html",context)
         
-
 def agregaralumno(request):
     if request.method=="POST":
         form=AlumnoForm(data=request.POST, files=request.FILES)
@@ -75,18 +82,12 @@ def vistaalumno(request,id):
     context={"form":form}
     return render(request,"alumno/vistaalumno.html",context)
 
-# class vista(TemplateView):
-#     def get(self,request,*args,**kwargs):
-#         alumno=Alumno.objects.get(id=id)
-#         form=AlumnoForm(instance=alumno)
-#         context={"form":form}
-#         return render(request,"alumno/vistaalumno.html",context)
-
 def eliminaralumno(request,id):
     alumno=Alumno.objects.get(id=id)
     alumno.estado=False
     alumno.save()
     return redirect("listaralumno")
+
 
 # TIPOS DE TRÁMITES
 
@@ -120,7 +121,6 @@ def agregartipostramites(request):
     context={'form':form}
     return render(request,"tipotramite/agregartipostramites.html",context)
 
-
 def editartipostramites(request,id):
     tipoT=TipoTramite.objects.get(id=id)
     if request.method=="POST":
@@ -133,14 +133,15 @@ def editartipostramites(request,id):
     context={"form":form}
     return render(request,"tipotramite/editartipostramites.html",context)
 
-
 def eliminartipostramites(request,id):
     tipoT=TipoTramite.objects.get(id=id)
     tipoT.estado=False
     tipoT.save()
     return redirect("listartipostramites")
 
+
 # REQUISITOS
+
 def listarrequisitos(request):
     queryset=request.GET.get("buscar")
     requisito=Requisito.objects.filter(estado=True)
@@ -175,13 +176,15 @@ def mostrarrequisitos(request,id):
     data = Requisito.objects.filter(tipoTramite_id=id).distinct
     context={'data':data}    
     return render(request,"requisito/mostrarrequisitos.html",context)
+   
     
 #FUTS
 
 def listarfuts(request):
+    username=request.user 
     queryset=request.GET.get("buscar")
-    fut=Fut.objects.filter(estado=True)
-    alumno=Alumno.objects.filter(estado=True).distinct
+    alumno = Alumno.objects.get(user=username)
+    fut=Fut.objects.filter(estado=True,alumnos=alumno)
     # paginación
     paginator = Paginator(fut,4)
     pagina = request.GET.get("page") or 1
@@ -193,17 +196,21 @@ def listarfuts(request):
             Q(fut__icontains=queryset),estado=True
         ).distinct()
     # tb agregaremos la paginación
-    context={'fut':fut,'alumno':alumno,'pagina':pagina,'paginas':paginas,'pagina_actual':pagina_actual} #pasa de la variable al dicciionario
+    context={'fut':fut,'pagina':pagina,'paginas':paginas,'pagina_actual':pagina_actual} #pasa de la variable al dicciionario
 
     return render(request,"fut/listarfuts.html",context)
 
 def agregarfuts(request):
     form=FutForm()
+    username=request.user
     if request.method=="POST":
         form=FutForm(request.POST)
         if form.is_valid():
-            form.estado=True
-            form.save()
+            formAlum = form.save(commit=False)
+            alumno = Alumno.objects.get(user=username)
+            formAlum.alumnos = alumno
+            formAlum.estado=True
+            formAlum.save()
             return redirect("listarfuts")
     context={'form':form}
     return render(request,"fut/agregarfuts.html",context)
@@ -259,6 +266,9 @@ def editartramites(request,id):
     context={"form":form}
     return render(request,"tramite/editartramites.html",context)
 
+
+#REQUISITOS - TRÁMITES
+
 def requisitostramite(request,id):
     data = Requisito.objects.filter(tipoTramite_id=id).distinct
     context={'data':data}    
@@ -266,3 +276,17 @@ def requisitostramite(request,id):
 
 def modelodoc(request):   
     return render(request,"requisito/modelodoc.html")
+
+
+#FUT PDF
+def reportfut(request,id):
+    data = Fut.objects.filter(id=id).distinct
+    context = {'data':data}
+    html = render_to_string("report/reportfut.html",context)
+
+    response=HttpResponse(content_type="application/pdf")
+    response["Content-Disposition"]="inline;report.pdf"
+
+    font_config=FontConfiguration()
+    HTML(string=html).write_pdf(response,font_config=font_config)
+    return response
