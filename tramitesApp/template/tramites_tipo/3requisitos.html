@@ -17,7 +17,7 @@
                     
                             <div class="row">
                                 <div class="col">
-                                    <h1> <b>{{ tipo.tipoTramite }}</b></h1>      
+                                    <h1><center><b>{{ tipo.tipoTramite }}</b></center></h1>      
                                 </div>
                                 <div class="col" style="display: none; align-items: center;">
                                     <input type="text" name="abreviatura_tipoTramite" value="{{ tipo.abreviatura_tipoTramite }}">        
@@ -59,15 +59,12 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div></div>
-
                             <div class="row">
-                                <div class="col">
-                                    <a href="{% url 'nuevotramite' %}" class="btn btn-secondary">Cancelar</a>
-                                    <input class='btn  btn-success btn-add' type="submit" value="Solicitar trámite">   
-                                </div> 
-                            </div>        
+                                <div class="update ml-auto mr-auto">
+                                    <a href="{% url 'nuevotramite' %}" class="btn btn-secondary btn-round"> <i class="nc-icon nc-minimal-left mr-2"></i>Cancelar</a>
+                                    <button type="submit" class="btn btn-success btn-round"><i class="nc-icon nc-send mr-2"></i> Enviar Trámite </button>
+                                </div>
+                            </div>
                 </form>
             </div>
         </div>

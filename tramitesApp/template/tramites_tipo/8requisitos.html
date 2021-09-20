@@ -17,27 +17,16 @@
                         
                                 <div class="row">
                                     <div class="col">
-                                        <h1> <b>{{ tipo.tipoTramite }}</b></h1>      
+                                        <h1><center><b>{{ tipo.tipoTramite }}</b></center></h1>       
                                     </div>
                                     <div class="col" style="display: none; align-items: center;">
                                         <input type="text" name="abreviatura_tipoTramite" value="{{ tipo.abreviatura_tipoTramite }}">        
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="form-group col-4">
-                                        <label for="exampleInputDate">Fecha: </label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                                            </div>
-                                            <input type="date" class="form-control"  name="fecha_tramite" >
-                                        </div>
-                                    </div>
-                                </div>
 
                                 <div class="row">
-                                    <div class="col">
+                                    <div class="col-md-3">
                                         <label for="documento">{{ req1 }}</label>
                                         <div class="input-group">
                                             <input type="file" name="id_requisito1" class="custom-file-input clearablefileinput form-control-file" id="id_requisito1" lang="es">
@@ -45,7 +34,7 @@
                                         </div>
                                     </div>
                                 
-                                    <div class="col">
+                                    <div class="col-md-3">
                                         <label for="documento">{{ req2 }}</label>
                                         <div class="input-group">
                                             <input type="file" name="id_requisito2" class="custom-file-input clearablefileinput form-control-file" id="id_requisito2" lang="es">
@@ -53,14 +42,15 @@
                                         </div>
                                     </div>
                                 
-                                    <div class="col">
+                                    <div class="col-md-3">
                                         <label for="documento">{{ req3 }}</label>
                                         <div class="input-group">
                                             <input type="file" name="id_requisito3" class="custom-file-input clearablefileinput form-control-file" id="id_requisito3" lang="es">
                                             <label class="custom-file-label" for="id_requisito3" id="id_requisito3_label"></label>
                                         </div>
                                     </div>
-                                    <div class="col">
+
+                                    <div class="col-md-3">
                                         <label for="documento">{{ req4 }}</label>
                                         <div class="input-group">
                                             <input type="file" name="id_requisito4" class="custom-file-input clearablefileinput form-control-file" id="id_requisito4" lang="es">
@@ -68,29 +58,30 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="row">
-                                    <div class="col">
+                                    <div class="col-md-3">
                                         <label for="documento">{{ req5 }}</label>
                                         <div class="input-group">
                                             <input type="file" name="id_requisito5" class="custom-file-input clearablefileinput form-control-file" id="id_requisito5" lang="es">
                                             <label class="custom-file-label" for="id_requisito4" id="id_requisito5_label"></label>
                                         </div>
                                     </div>
-                                    <div class="col">
+                                    <div class="col-md-3">
                                         <label for="documento">{{ req6 }}</label>
                                         <div class="input-group">
                                             <input type="file" name="id_requisito6" class="custom-file-input clearablefileinput form-control-file" id="id_requisito6" lang="es">
                                             <label class="custom-file-label" for="id_requisito6" id="id_requisito6_label"></label>
                                         </div>
                                     </div>
-                                    <div class="col">
+                                    <div class="col-md-3">
                                         <label for="documento">{{ req7 }}</label>
                                         <div class="input-group">
                                             <input type="file" name="id_requisito7" class="custom-file-input clearablefileinput form-control-file" id="id_requisito7" lang="es">
                                             <label class="custom-file-label" for="id_requisito7" id="id_requisito7_label"></label>
                                         </div>
                                     </div>
-                                    <div class="col">
+                                    <div class="col-md-3">
                                         <label for="documento">{{ req8 }}</label>
                                         <div class="input-group">
                                             <input type="file" name="id_requisito8" class="custom-file-input clearablefileinput form-control-file" id="id_requisito8" lang="es">
@@ -98,13 +89,13 @@
                                         </div>
                                     </div>
                                 </div>
-                    
-                    <div class="row">
-                        <div class="col"> 
-                            <a href="{% url 'nuevotramite' %}" class="btn btn-secondary">Cancelar</a>
-                            <input class='btn  btn-success btn-add' type="submit" value="Solicitar trámite">    
-                        </div>
-                    </div>
+
+                            <div class="row">
+                                <div class="update ml-auto mr-auto">
+                                    <a href="{% url 'nuevotramite' %}" class="btn btn-secondary btn-round"> <i class="nc-icon nc-minimal-left mr-2"></i>Cancelar</a>
+                                    <button type="submit" class="btn btn-success btn-round"><i class="nc-icon nc-send mr-2"></i> Enviar Trámite </button>
+                                </div>
+                            </div>
                     </form>                    
             </div>
         </div>

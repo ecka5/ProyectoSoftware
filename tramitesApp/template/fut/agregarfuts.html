@@ -10,11 +10,12 @@
             <form method="post" enctype="multipart/form-data" >
                 {% csrf_token %}
                 {{form | crispy}}
-                <div class="d-flex justify-content-end">
-                    <a href="{% url 'listarfuts' %}" class="btn btn-secondary">Cancelar</a>
-                    &nbsp;
-                    <button type="submit" class="btn btn-primary">Guardar</button> 
-                </div>
+                <div class="row">
+                    <div class="update ml-auto mr-auto">
+                        <a href="{% url 'listarfuts' %}" class="btn btn-secondary btn-round"> <i class="nc-icon nc-minimal-left mr-2"></i>Cancelar</a>
+                        <button type="submit" class="btn btn-primary btn-round"><i class="fa fa-save mr-2"></i> Guardar </button>
+                    </div>
+                </div> 
             </form>
         </div> 
     </div>

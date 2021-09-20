@@ -3,7 +3,7 @@ from tramitesApp.models import Alumno,Requisito,TipoTramite,Tramite,Fut
 
 # Register your models here.
 class AlumnoAdmin(admin.ModelAdmin):
-     list_display=("nombres","apellidos","codigo","dni", "direccion","email","telefono","facultad","escuela","firma")
+     list_display=("nombres","apellidos","codigo","dni", "direccion","email","telefono","facultad","escuela","firma","imgperfil")
 admin.site.register(Alumno,AlumnoAdmin)
 
 class TipoTramiteAdmin(admin.ModelAdmin):

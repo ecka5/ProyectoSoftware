@@ -1,37 +1,23 @@
 {% extends "plantilla.html" %}
 {% block title %} Lista Alumno {% endblock %}
+
 {% block content %}
-<div class="container">
-    <div class="card card-outline card-info mt-3">
-        
+    
+<div class="col-md-12">
+    <div class="card ">
         <div class="card-header">
-                
-            <h1 class="card-title"> 
-            {% if perms.tramitesApp.add_alumno %}
-            <b>LISTADO DE ALUMNOS / </b>   
-            {% endif %}
-            {% if perms.tramitesApp.view_alumno %}
-            <b>DATOS PERSONALES</b>
-            {% endif %}
-            </h1>      <br><br>
+            <h5 class="card-title"> 
+                <center>
+                {% if 'GrupoAdministrador' == request.user.groups.all.0.name %}
+                    <b>LISTADO DE ALUMNOS</b>
+                {% endif %}
+                {% if 'GrupoAlumno' == request.user.groups.all.0.name %}
+                    <b>DATOS PERSONALES</b>
+                {% endif %}   
+                </center> 
+            </h5>
         </div>
-
-        <div class="card-body">        
-            <div class="row"> 
-                <div class="col-md-6 pull-right">
-                    <form action="" method="GET">
-                        <div class="input-group">
-                            <input type="text" name="buscar" id="buscar" class="form-control" autofocus placeholder="Buscar" value="">
-                            <span class="input-group-btn">
-                            <button class="btn btn-primary">
-                            <i class="fa fa-search"></i>
-                            </button>
-                            </span>
-                        </div>         
-                    </form>
-                </div> 
-            </div>
-
+        <div class="card-body ">
             <table class="table mt-2">
                 <table id="tablasubfamilias" class="table table-striped mt-4" style="width:100%">
                     <thead class="bg-info text-white">
@@ -111,11 +97,9 @@
                     </ul>
                 </nav>
             </div>
-        </div>
-        
+        </div>    
     </div>
 </div>
-
 {% endblock %}
 
 {% block js %}

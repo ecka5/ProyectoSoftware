@@ -1,29 +1,17 @@
 {% extends "plantilla.html" %}
 {% block title %} Tipos de Trámites {% endblock %}
 {% block content %}
-<div class="container">
-    <div class="card card-outline card-info mt-3">
+
+    <div class="card col-md-12 card-outline card-info mt-3">
         <div class="card-header">    
-            <h1 class="card-title"> <b>Lista de Tipos de Trámites</b>   </h1>      <br><br>
+            <h1 class="card-title"> <center><b>Tipos de Trámites</b></center></h1><br><br>
             {% if perms.tramitesApp.add_tipotramite %}
-            <a href="{% url 'agregartipostramites' %}" class='btn btn-sm btn-light btn-add'><i class='fas fa-plus'></i> NUEVO</a>
+            <a href="{% url 'agregartipostramites' %}" class='btn btn-sm btn-light btn-add'><i class='fa fa-plus'></i> NUEVO</a>
             {% endif %}  
         </div>
 
         <div class="card-body">        
             <div class="row"> 
-                <div class="col-md-6 pull-right">
-                    <form action="" method="GET">
-                        <div class="input-group">
-                            <input type="text" name="buscar" id="buscar" class="form-control" autofocus placeholder="Buscar" value="">
-                            <span class="input-group-btn">
-                            <button class="btn btn-primary btn-lg">
-                            <i class="fa fa-search"></i>
-                            </button>
-                            </span>
-                        </div>         
-                    </form>
-                </div>
                 <div class="col-md-6">
                     <button onclick="abrir_modal_modelodoc('{% url 'modelodoc' %}')" class="btn btn-danger btn-sm">Modelo documentos</button></center></td>
                 </div>
@@ -89,11 +77,12 @@
 
             </div>
         </div>
+        <div class="modal fade" id="mostrarrequisitos" role="dialgog"></div>
+        <div class="modal fade" id="modelodoc" role="dialgog"></div>
     </div>
 
-    <div class="modal fade" id="mostrarrequisitos" role="dialgog"></div>
-    <div class="modal fade" id="modelodoc" role="dialgog"></div>
-</div>
+    
+
 {% endblock %}
 
 {% block js %}

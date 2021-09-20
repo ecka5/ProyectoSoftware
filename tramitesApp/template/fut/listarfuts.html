@@ -1,11 +1,11 @@
 {% extends "plantilla.html" %}
 {% block title %} MIS FUTS {% endblock %}
 {% block content %}
-<div class="container">
-    <div class="card card-outline card-info mt-3">
+
+    <div class="card col-md-12 card-outline card-info mt-3">
         <div class="card-header">    
             <h1 class="card-title"> <b>Lista de Futs</b>   </h1>      <br><br>
-            <a href="{% url 'agregarfuts' %}" class='btn btn-sm btn-light btn-add'><i class='fas fa-plus'></i> NUEVO</a>
+            <a href="{% url 'agregarfuts' %}" class='btn btn-sm btn-light btn-add'><i class='fa fa-plus'></i> NUEVO</a>
         </div>
 
         <div class="card-body">        
@@ -36,7 +36,7 @@
                         {% for itemfut in fut %} 
                         <tr><!--  codigo pa que meustre los datos, verifica si hay registro -->
                             <td><center>{{ itemfut.tipoTramite }}</center></td>                            
-                            <td><center><a href="{% url 'reportfut' itemfut.id %}" class="btn btn-info btn-m" ><i class="fa fa-file-pdf mr-2" aria-hidden="true"></i> Visualizar PDF</a></center></td>                            
+                            <td><center><a href="{% url 'reportfut' itemfut.id %}" class="btn btn-info btn-m" ><i class="fa fa-file mr-2" aria-hidden="true"></i> Visualizar PDF</a></center></td>                            
                         </tr> 
                         {% endfor %}
                     {% else %}
@@ -82,7 +82,7 @@
             </div>
         </div>
     </div>
-</div>
+    
 {% endblock %}
 
 {% block js %}

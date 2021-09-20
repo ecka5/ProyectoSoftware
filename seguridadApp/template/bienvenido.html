@@ -1,5 +1,7 @@
 {% extends "plantilla.html" %}
-{% block title %} Bienvenido {% endblock %}
+{% load static %}
 {% block content %}
-<h1>Bienvenido : {{ user.get_username }} !!</h1>
+    {% if 'GrupoAlumno' == request.user.groups.all.0.name %}
+        <img class="avatar border-gray" src="{% static '/loginmodern/images/fondotramites.jpg' %}">  
+    {% endif %}
 {% endblock %}

@@ -1,11 +1,10 @@
 {% extends "plantilla.html" %}
 {% block content %}
-<div class="container">
-    <div class="card card-outline card-info mt-3">
+    <div class="card col-md-12 card-outline card-info mt-3">
         <div class="card-header">
             <div class="row">
                 <div class="col">
-                    <h1 class="card-title"> <b>TRÁMITES PENDIENTES</b>  </h1>
+                    <h2 class="card-title"> <b><center>TRÁMITES PENDIENTES</b></center></h2>
                 </div>
             </div>
         </div>   
@@ -16,7 +15,7 @@
                         <div class="input-group">
                             <input type="text" name="buscar" id="buscar" class="form-control" autofocus placeholder="Buscar" value="">
                             <span class="input-group-btn ">
-                            <button class="btn btn-primary btn-lg">
+                            <button class="btn btn-primary btn-md">
                             <i class="fa fa-search"></i>
                             </button>
                             </span>
@@ -63,36 +62,36 @@
                                     {% endif%}
                             <td>
                                         {% if itemtramites.tipoTramite.abreviatura_tipoTramite == "RM" %}    
-                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito1.url }}" ruta="{{ itemtramites.file_tramite.requisito1 }}" class="btn btn-block btn-primary"><i class="fas fa-download mr-2"></i>Descargar Requisito 1</button>
-                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito2.url }}" ruta="{{ itemtramites.file_tramite.requisito2 }}" class="btn btn-block btn-primary"><i class="fas fa-download mr-2"></i>Descargar Requisito 2</button>
-                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito3.url }}" ruta="{{ itemtramites.file_tramite.requisito3 }}" class="btn btn-block btn-primary"><i class="fas fa-download mr-2"></i>Descargar Requisito 3</button>
+                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito1.url }}" ruta="{{ itemtramites.file_tramite.requisito1 }}" class="btn btn-block btn-primary"><i class="fa fa-download mr-2"></i>Descargar Requisito 1</button>
+                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito2.url }}" ruta="{{ itemtramites.file_tramite.requisito2 }}" class="btn btn-block btn-primary"><i class="fa fa-download mr-2"></i>Descargar Requisito 2</button>
+                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito3.url }}" ruta="{{ itemtramites.file_tramite.requisito3 }}" class="btn btn-block btn-primary"><i class="fa fa-download mr-2"></i>Descargar Requisito 3</button>
                                         {% elif itemtramites.tipoTramite.abreviatura_tipoTramite == "MC" or itemtramites.tipoTramite.abreviatura_tipoTramite == "ACPP" or itemtramites.tipoTramite.abreviatura_tipoTramite == "ACCC" or itemtramites.tipoTramite.abreviatura_tipoTramite == "TCV"  %}     
-                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito1.url }}" ruta="{{ itemtramites.file_tramite.requisito1 }}" class="btn btn-block btn-primary"><i class="fas fa-download mr-2"></i>Descargar Requisito 1</button>
-                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito2.url }}" ruta="{{ itemtramites.file_tramite.requisito2 }}" class="btn btn-block btn-primary"><i class="fas fa-download mr-2"></i>Descargar Requisito 2</button>
-                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito3.url }}" ruta="{{ itemtramites.file_tramite.requisito3 }}" class="btn btn-block btn-primary"><i class="fas fa-download mr-2"></i>Descargar Requisito 3</button>
-                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito4.url }}" ruta="{{ itemtramites.file_tramite.requisito4 }}" class="btn btn-block btn-primary"><i class="fas fa-download mr-2"></i>Descargar Requisito 4</button>
+                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito1.url }}" ruta="{{ itemtramites.file_tramite.requisito1 }}" class="btn btn-block btn-primary"><i class="fa fa-download mr-2"></i>Descargar Requisito 1</button>
+                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito2.url }}" ruta="{{ itemtramites.file_tramite.requisito2 }}" class="btn btn-block btn-primary"><i class="fa fa-download mr-2"></i>Descargar Requisito 2</button>
+                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito3.url }}" ruta="{{ itemtramites.file_tramite.requisito3 }}" class="btn btn-block btn-primary"><i class="fa fa-download mr-2"></i>Descargar Requisito 3</button>
+                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito4.url }}" ruta="{{ itemtramites.file_tramite.requisito4 }}" class="btn btn-block btn-primary"><i class="fa fa-download mr-2"></i>Descargar Requisito 4</button>
                                        {% elif itemtramites.tipoTramite.abreviatura_tipoTramite == "TOG" %}     
-                                          <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito1.url }}" ruta="{{ itemtramites.file_tramite.requisito1 }}" class="btn btn-block btn-primary"><i class="fas fa-download mr-2"></i>Descargar Requisito 1</button>
-                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito2.url }}" ruta="{{ itemtramites.file_tramite.requisito2 }}" class="btn btn-block btn-primary"><i class="fas fa-download mr-2"></i>Descargar Requisito 2</button>
-                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito3.url }}" ruta="{{ itemtramites.file_tramite.requisito3 }}" class="btn btn-block btn-primary"><i class="fas fa-download mr-2"></i>Descargar Requisito 3</button>
-                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito4.url }}" ruta="{{ itemtramites.file_tramite.requisito4 }}" class="btn btn-block btn-primary"><i class="fas fa-download mr-2"></i>Descargar Requisito 4</button>
-                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito5.url }}" ruta="{{ itemtramites.file_tramite.requisito5 }}" class="btn btn-block btn-primary"><i class="fas fa-download mr-2"></i>Descargar Requisito 5</button>
+                                          <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito1.url }}" ruta="{{ itemtramites.file_tramite.requisito1 }}" class="btn btn-block btn-primary"><i class="fa fa-download mr-2"></i>Descargar Requisito 1</button>
+                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito2.url }}" ruta="{{ itemtramites.file_tramite.requisito2 }}" class="btn btn-block btn-primary"><i class="fa fa-download mr-2"></i>Descargar Requisito 2</button>
+                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito3.url }}" ruta="{{ itemtramites.file_tramite.requisito3 }}" class="btn btn-block btn-primary"><i class="fa fa-download mr-2"></i>Descargar Requisito 3</button>
+                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito4.url }}" ruta="{{ itemtramites.file_tramite.requisito4 }}" class="btn btn-block btn-primary"><i class="fa fa-download mr-2"></i>Descargar Requisito 4</button>
+                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito5.url }}" ruta="{{ itemtramites.file_tramite.requisito5 }}" class="btn btn-block btn-primary"><i class="fa fa-download mr-2"></i>Descargar Requisito 5</button>
                                         {% elif itemtramites.tipoTramite.abreviatura_tipoTramite == "ES" %}     
-                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito1.url }}" ruta="{{ itemtramites.file_tramite.requisito1 }}" class="btn btn-block btn-primary"><i class="fas fa-download mr-2"></i>Descargar Requisito 1</button>
-                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito2.url }}" ruta="{{ itemtramites.file_tramite.requisito2 }}" class="btn btn-block btn-primary"><i class="fas fa-download mr-2"></i>Descargar Requisito 2</button>
-                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito3.url }}" ruta="{{ itemtramites.file_tramite.requisito3 }}" class="btn btn-block btn-primary"><i class="fas fa-download mr-2"></i>Descargar Requisito 3</button>
-                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito4.url }}" ruta="{{ itemtramites.file_tramite.requisito4 }}" class="btn btn-block btn-primary"><i class="fas fa-download mr-2"></i>Descargar Requisito 4</button>
-                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito5.url }}" ruta="{{ itemtramites.file_tramite.requisito5 }}" class="btn btn-block btn-primary"><i class="fas fa-download mr-2"></i>Descargar Requisito 5</button>
-                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito6.url }}" ruta="{{ itemtramites.file_tramite.requisito6 }}" class="btn btn-block btn-primary"><i class="fas fa-download mr-2"></i>Descargar Requisito 6</button>
+                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito1.url }}" ruta="{{ itemtramites.file_tramite.requisito1 }}" class="btn btn-block btn-primary"><i class="fa fa-download mr-2"></i>Descargar Requisito 1</button>
+                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito2.url }}" ruta="{{ itemtramites.file_tramite.requisito2 }}" class="btn btn-block btn-primary"><i class="fa fa-download mr-2"></i>Descargar Requisito 2</button>
+                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito3.url }}" ruta="{{ itemtramites.file_tramite.requisito3 }}" class="btn btn-block btn-primary"><i class="fa fa-download mr-2"></i>Descargar Requisito 3</button>
+                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito4.url }}" ruta="{{ itemtramites.file_tramite.requisito4 }}" class="btn btn-block btn-primary"><i class="fa fa-download mr-2"></i>Descargar Requisito 4</button>
+                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito5.url }}" ruta="{{ itemtramites.file_tramite.requisito5 }}" class="btn btn-block btn-primary"><i class="fa fa-download mr-2"></i>Descargar Requisito 5</button>
+                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito6.url }}" ruta="{{ itemtramites.file_tramite.requisito6 }}" class="btn btn-block btn-primary"><i class="fa fa-download mr-2"></i>Descargar Requisito 6</button>
                                         {% elif itemtramites.tipoTramite.abreviatura_tipoTramite == "TOT" %}     
-                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito1.url }}" ruta="{{ itemtramites.file_tramite.requisito1 }}" class="btn btn-block btn-primary"><i class="fas fa-download mr-2"></i>Descargar Requisito 1</button>
-                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito2.url }}" ruta="{{ itemtramites.file_tramite.requisito2 }}" class="btn btn-block btn-primary"><i class="fas fa-download mr-2"></i>Descargar Requisito 2</button>
-                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito3.url }}" ruta="{{ itemtramites.file_tramite.requisito3 }}" class="btn btn-block btn-primary"><i class="fas fa-download mr-2"></i>Descargar Requisito 3</button>
-                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito4.url }}" ruta="{{ itemtramites.file_tramite.requisito4 }}" class="btn btn-block btn-primary"><i class="fas fa-download mr-2"></i>Descargar Requisito 4</button>
-                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito5.url }}" ruta="{{ itemtramites.file_tramite.requisito5 }}" class="btn btn-block btn-primary"><i class="fas fa-download mr-2"></i>Descargar Requisito 5</button>
-                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito6.url }}" ruta="{{ itemtramites.file_tramite.requisito6 }}" class="btn btn-block btn-primary"><i class="fas fa-download mr-2"></i>Descargar Requisito 6</button>
-                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito7.url }}" ruta="{{ itemtramites.file_tramite.requisito7 }}" class="btn btn-block btn-primary"><i class="fas fa-download mr-2"></i>Descargar Requisito 7</button>
-                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito8.url }}" ruta="{{ itemtramites.file_tramite.requisito8 }}" class="btn btn-block btn-primary"><i class="fas fa-download mr-2"></i>Descargar Requisito 8</button>
+                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito1.url }}" ruta="{{ itemtramites.file_tramite.requisito1 }}" class="btn btn-block btn-primary"><i class="fa fa-download mr-2"></i>Descargar Requisito 1</button>
+                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito2.url }}" ruta="{{ itemtramites.file_tramite.requisito2 }}" class="btn btn-block btn-primary"><i class="fa fa-download mr-2"></i>Descargar Requisito 2</button>
+                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito3.url }}" ruta="{{ itemtramites.file_tramite.requisito3 }}" class="btn btn-block btn-primary"><i class="fa fa-download mr-2"></i>Descargar Requisito 3</button>
+                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito4.url }}" ruta="{{ itemtramites.file_tramite.requisito4 }}" class="btn btn-block btn-primary"><i class="fa fa-download mr-2"></i>Descargar Requisito 4</button>
+                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito5.url }}" ruta="{{ itemtramites.file_tramite.requisito5 }}" class="btn btn-block btn-primary"><i class="fa fa-download mr-2"></i>Descargar Requisito 5</button>
+                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito6.url }}" ruta="{{ itemtramites.file_tramite.requisito6 }}" class="btn btn-block btn-primary"><i class="fa fa-download mr-2"></i>Descargar Requisito 6</button>
+                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito7.url }}" ruta="{{ itemtramites.file_tramite.requisito7 }}" class="btn btn-block btn-primary"><i class="fa fa-download mr-2"></i>Descargar Requisito 7</button>
+                                        <button type="button" onclick="downloadURI(this)" url="{{ itemtramites.file_tramite.requisito8.url }}" ruta="{{ itemtramites.file_tramite.requisito8 }}" class="btn btn-block btn-primary"><i class="fa fa-download mr-2"></i>Descargar Requisito 8</button>
                                     </td>  
                             {% else %}
                             {% endif %}   
@@ -143,49 +142,49 @@
             </div>
 
         </div>
-    </div>    
-</div>
+      
 
-<div class="modal fade" id="modalResolucion" tabindex="-1" role="dialog" aria-labelledby="modalResolucionLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <form method="post" action="/tipoTramite/" enctype="multipart/form-data" >
-        {% csrf_token %}
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalVisar_h5">Nuevo trámite</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
 
-                <div class="modal-body">
-                    <div class="form-row">
-                        <div class="col">
-                            <select class="form-select" aria-label="Default select example" name="abreviatura_tipoTramite">
-                                <option selected>- Elige el nuevo trámite a elegir - </option>
-                                {% if tipoTramite %}
-                                    {% for itemtipoTramite in tipoTramite %} 
-                                        <option value="{{ itemtipoTramite.abreviatura_tipoTramite }}">{{ itemtipoTramite.tipoTramite }}</option>
-                                    {% endfor %}
-                                {% else %}
-                                        
-                                {% endif %}
-                            </select>                
+        <div class="modal fade" id="modalResolucion" tabindex="-1" role="dialog" aria-labelledby="modalResolucionLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <form method="post" action="/tipoTramite/" enctype="multipart/form-data" >
+                {% csrf_token %}
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalVisar_h5">Nuevo trámite</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
-                    </div> 
-                    
-                </div>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <input class='btn  btn-success btn-add' type="submit" value="Crear trámite">
-                </div>
+                        <div class="modal-body">
+                            <div class="form-row">
+                                <div class="col">
+                                    <select class="form-select" aria-label="Default select example" name="abreviatura_tipoTramite">
+                                        <option selected>- Elige el nuevo trámite a elegir - </option>
+                                        {% if tipoTramite %}
+                                            {% for itemtipoTramite in tipoTramite %} 
+                                                <option value="{{ itemtipoTramite.abreviatura_tipoTramite }}">{{ itemtipoTramite.tipoTramite }}</option>
+                                            {% endfor %}
+                                        {% else %}
+                                                
+                                        {% endif %}
+                                    </select>                
+                                </div>
+                            </div> 
+                            
+                        </div>
 
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <input class='btn  btn-success btn-add' type="submit" value="Crear trámite">
+                        </div>
+
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
-</div>
-
+        </div>
+    </div>  
 {% endblock %}
 
 

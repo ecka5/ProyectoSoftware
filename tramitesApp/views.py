@@ -72,7 +72,7 @@ def editaralumno(request,id):
         form=AlumnoForm(request.POST,instance=alumno,files=request.FILES)
         if form.is_valid():
             form.save()
-            return redirect("listaralumno")
+            return redirect("perfilalumno")
     else:
         form=AlumnoForm(instance=alumno)
     context={"form":form}
@@ -89,6 +89,45 @@ def eliminaralumno(request,id):
     alumno.estado=False
     alumno.save()
     return redirect("listaralumno")
+
+#PERFIL
+
+def perfilalumno(request):    
+    if request.user.is_staff:
+        queryset=request.GET.get("buscar")
+        alumno=Alumno.objects.filter(estado=True)
+        
+        # paginación
+        paginator = Paginator(alumno,3)
+        pagina = request.GET.get("page") or 1
+        alumno = paginator.get_page(pagina)
+        pagina_actual = int(pagina)
+        paginas = range(1,alumno.paginator.num_pages +1)
+        if queryset:
+            alumno=Alumno.objects.filter(
+                Q(descripcion__icontains=queryset),estado=True
+            ).distinct()
+        # tb agregaremos la paginación
+        context={'alumno':alumno,'pagina':pagina,'paginas':paginas,'pagina_actual':pagina_actual} #pasa de la variable al dicciionario
+        
+        return render(request,"alumno/perfilalumno.html",context)        
+    else:        
+        queryset=request.GET.get("buscar")
+        alumno=Alumno.objects.filter(user=request.user)         
+        # paginación
+        paginator = Paginator(alumno,3)
+        pagina = request.GET.get("page") or 1
+        alumno = paginator.get_page(pagina)
+        pagina_actual = int(pagina)
+        paginas = range(1,alumno.paginator.num_pages +1)
+        if queryset:
+            alumno=Alumno.objects.filter(
+                Q(descripcion__icontains=queryset),estado=True
+            ).distinct()
+        # tb agregaremos la paginación
+        context={'alumno':alumno,'pagina':pagina,'paginas':paginas,'pagina_actual':pagina_actual} #pasa de la variable al dicciionario
+
+        return render(request,"alumno/perfilalumno.html",context)
 
 
 # TIPOS DE TRÁMITES
@@ -239,14 +278,14 @@ def listartramites(request):
     tipoTramite=TipoTramite.objects.filter(estado=True)
     requisito=Requisito.objects.filter(estado=True).distinct
     # paginación
-    paginator = Paginator(tramites,3)
+    paginator = Paginator(tramites,2)
     pagina = request.GET.get("page") or 1
     tramites = paginator.get_page(pagina)
     pagina_actual = int(pagina)
     paginas = range(1,tramites.paginator.num_pages +1)
     if queryset:
         tramites=Tramite.objects.filter(
-            Q(tipoTramite__icontains=queryset),estado=True
+            Q(tipoTramite__tipoTramite__icontains=queryset),estado=True
         ).distinct()
     # tb agregaremos la paginación
     context={'tipoTramite':tipoTramite,'tramites':tramites,'requisito':requisito,'pagina':pagina,'paginas':paginas,'pagina_actual':pagina_actual} #pasa de la variable al dicciionario

@@ -17,6 +17,7 @@ class Alumno(models.Model):
     facultad=models.CharField(default="INGENIERIA",max_length=10)
     escuela=models.CharField(default="INGENIERIA DE SISTEMAS",max_length=22)
     firma=models.ImageField(upload_to="alumno",null = True)
+    imgperfil=models.ImageField(upload_to="imgperfil",null = True)
     estado=models.BooleanField()    
     def __str__(self):
         return self.nombres
@@ -39,7 +40,7 @@ class Requisito(models.Model):
 class File_tramite(models.Model):    
     requisito1=models.FileField(upload_to="tramite/",null = True)
     requisito2=models.FileField(upload_to="tramite/",null = True)
-    requisito3=models.FileField(upload_to="tramite/",null = True)
+    requisito3=models.FileField(upload_to="tramite/",null = True)   
     requisito4=models.FileField(upload_to="tramite/",null = True)
     requisito5=models.FileField(upload_to="tramite/",null = True)
     requisito6=models.FileField(upload_to="tramite/",null = True)

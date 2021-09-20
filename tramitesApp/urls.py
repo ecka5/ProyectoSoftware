@@ -3,16 +3,18 @@ from tramitesApp.views import listaralumno, agregaralumno,editaralumno,eliminara
 from tramitesApp.views import listartipostramites,agregartipostramites,editartipostramites,eliminartipostramites,nuevotramite
 from tramitesApp.views import listarrequisitos,mostrarrequisitos,agregarrequisitos,listartramites
 from tramitesApp.views import agregarfuts,agregartramites,requisitostramite,editartramites
-from tramitesApp.views import modelodoc,listarfuts,tipoTramite,savetramite,secre,verificado,rechazado,direc,visadod,rechazadod,reportfut
+from tramitesApp.views import modelodoc,listarfuts,tipoTramite,savetramite,secre,verificado,rechazado,direc,visadod,rechazadod,reportfut,perfilalumno
 from django.contrib.auth import views
 
 urlpatterns = [ 
     
     #ALUMNOS
     path('listaralumno/',listaralumno ,name="listaralumno"),
+    path('perfilalumno/',perfilalumno ,name="perfilalumno"),
     path('agregaralumno/',agregaralumno, name="agregaralumno"),
     path('editaralumno/<int:id>/',editaralumno, name="editaralumno"),
-    path('eliminaralumno/<int:id>/',eliminaralumno, name="eliminaralumno"),    
+    path('eliminaralumno/<int:id>/',eliminaralumno, name="eliminaralumno"), 
+       
     #TIPOS DE TRÁMITES
     path('listartipostramites/',listartipostramites ,name="listartipostramites"),
     path('agregartipostramites/',agregartipostramites, name="agregartipostramites"),

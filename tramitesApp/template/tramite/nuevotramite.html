@@ -1,60 +1,58 @@
 {% extends "plantilla.html" %}
 {% block content %}
-<div class="container">
-    <div class="card card-outline card-info mt-3">
+
+    <div class="card col-md-12 card-outline card-info mt-3">
         <div class="card-header">
             <div class="row">
-                <div class="col">
-                    <h1 class="card-title"> <b>REALIZAR UN NUEVO TRÁMITE</b>  </h1>
+                <div class="col-12">
+                <h2 class="card-title"><center><b>REALIZAR UN NUEVO TRÁMITE</b></center></h2><br>
                 </div>
-                <div class="col">
-                    <button type="button" class="btn btn-add btn-info" data-toggle="modal" data-target="#modalResolucion"> NUEVO </button>
+                <div class="col-12">
+                    <center><button type="button" class="btn btn-add btn-info" data-toggle="modal" data-target="#modalResolucion"> NUEVO </button></center>
                 </div>
             </div>
         </div>   
-    </div>    
-</div>
 
-<div class="modal fade" id="modalResolucion" tabindex="-1" role="dialog" aria-labelledby="modalResolucionLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <form method="post" action="/tipoTramite/" enctype="multipart/form-data" >
-        {% csrf_token %}
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalVisar_h5">Nuevo trámite</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+    <div class="modal fade" id="modalResolucion" tabindex="-1" role="dialog" aria-labelledby="modalResolucionLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <form method="post" action="/tipoTramite/" enctype="multipart/form-data" >
+            {% csrf_token %}
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalVisar_h5"><center>Nuevo trámite</center></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="form-row">
+                            <div class="col">
+                                <select class="form-select" aria-label="Default select example" name="abreviatura_tipoTramite">
+                                    <option selected>- Elige el nuevo trámite a elegir - </option>
+                                    {% if tipoTramite %}
+                                        {% for itemtipoTramite in tipoTramite %} 
+                                            <option value="{{ itemtipoTramite.abreviatura_tipoTramite }}">{{ itemtipoTramite.tipoTramite }}</option>
+                                        {% endfor %}
+                                    {% else %}
+                                            
+                                    {% endif %}
+                                </select>                
+                            </div>
+                        </div> 
+                        
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input class='btn  btn-success btn-add' type="submit" value="Crear trámite">
+                    </div>
+
                 </div>
-
-                <div class="modal-body">
-                    <div class="form-row">
-                        <div class="col">
-                            <select class="form-select" aria-label="Default select example" name="abreviatura_tipoTramite">
-                                <option selected>- Elige el nuevo trámite a elegir - </option>
-                                {% if tipoTramite %}
-                                    {% for itemtipoTramite in tipoTramite %} 
-                                        <option value="{{ itemtipoTramite.abreviatura_tipoTramite }}">{{ itemtipoTramite.tipoTramite }}</option>
-                                    {% endfor %}
-                                {% else %}
-                                        
-                                {% endif %}
-                            </select>                
-                        </div>
-                    </div> 
-                    
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <input class='btn  btn-success btn-add' type="submit" value="Crear trámite">
-                </div>
-
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
-
+</div> 
 {% endblock %}
 
 
