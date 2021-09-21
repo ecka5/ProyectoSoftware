@@ -9,7 +9,53 @@
         <div class="card-body"> 
             <form action="" method="post" enctype="multipart/form-data" >
                 {% csrf_token %}
-                {{ form | crispy}}   
+                <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            {{ form.nombres | as_crispy_field }}
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            {{ form.apellidos | as_crispy_field }}
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            {{ form.codigo | as_crispy_field }}
+                        </div>
+                </div>
+                <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            {{ form.dni | as_crispy_field }}
+                          </div>
+                          <div class="col-md-4 mb-3">
+                            {{ form.direccion | as_crispy_field }}
+                          </div>
+                          <div class="col-md-4 mb-3">
+                            {{ form.email | as_crispy_field }}
+                          </div>
+                </div>
+                <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            {{ form.telefono | as_crispy_field }}
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            {{ form.firma | as_crispy_field }}
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            {{ form.imgperfil | as_crispy_field }}
+                        </div>
+                </div> 
+                <div class="form-row" hidden>
+                        <div class="col-md-4 mb-3">
+                            {{ form.user | as_crispy_field }}
+                        </div>
+                       <div class="col-md-4 mb-3">
+                            {{ form.estado | as_crispy_field }}
+                        </div> 
+                        <div class="col-md-4 mb-3">
+                            {{ form.escuela | as_crispy_field }}
+                        </div> 
+                        <div class="col-md-4 mb-3">
+                            {{ form.facultad | as_crispy_field }}
+                        </div> 
+                </div>
                 <div class="row">
                     <div class="update ml-auto mr-auto">
                         <button class="btn btn-secondary btn-round"><i class="nc-icon nc-minimal-left mr-2"></i><a href="{% url 'perfilalumno' %}" style="color: white;"> Cancelar</a></button>
